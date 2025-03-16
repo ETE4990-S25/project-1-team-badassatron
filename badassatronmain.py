@@ -9,10 +9,18 @@ def mainmenu():
     print('')
     playername = input('First, please tell us who you are: ')
     print('')
-    print('Now, we need to create your character. ')
-    characterselection()
 
-#Phase 1: Character Selection (with traits and strengths)
+#Phase 1: Prelude
+#You are miner, given freedom(context), chose your path
+def Prelude():
+    print
+
+
+    character_selection()
+
+#Phase 2: Character Selection (with traits and strengths)
+
+#put in function character_selection
 class Player:
     def _init_(self, name, character_class):
         self.name = name
@@ -34,9 +42,42 @@ class Player:
     
 
 #Phase 2: Establish Inventory (dictionary with items and traits)
-import json
+class Item:
+    def __init__(self, name, damage, durability, blank):
+        self.name = name 
+        self.damage = damage
+        self.durability = durability
+        self.blank = blank #create item traits
 
+    def use(self):
+        if self.durability > 0:
+            self.durability -= 1
+            print (f'Used {self.name}, item health now {self.durability}')
+        else:
+            print(f'{self.name} is broken')
     
+class Inventory:
+    def __init__(self):
+        self.items = []
+
+    def add_item_to_bag(self, item)
+        self.items.append(item)
+        print()
+
+Allspark=
+Matrix_of_Leadership=
+Axe= #warrior
+Sword=
+Bazooka=
+Handheld_Turret=
+Zapper= 
+Shield= #tank
+Energon=
+Medpack= #medic
+Jetpack= #aerial
+Add_Changer= #gives new transformation
+
+
 if __name__== '__main__': #so the program will run, dont delete
     mainmenu()
 
