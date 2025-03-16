@@ -48,17 +48,17 @@ def character_selection():
     def set_attributes(self, character_class):
         if character_class == "Medic":
             self.heal = 20
-        elif character_class == "Warrior"
+        elif character_class == "Warrior":
             self.attack = 20
-        elif character_class == "Tank"
+        elif character_class == "Tank":
             self.shield = 20
-        elif character_class == "Aerial"
+        elif character_class == "Aerial":
             self.agility = 20
         else:
             print("Invalid character class")
 
     def show_profile(self):
-        return f"Name: {self.name}, Class: {self.character_class}, HP: {self.health}, Attack: {self.attack}, Heal: {self.heal}"
+        return f"Name: {self.name}, Class: {self.character_class}, HP: {self.health}, Attack: {self.attack}, Heal: {self.heal}, Shield: {self.shield}, Agility: {self.agility}"
     
 
 #Phase 3: Establish Inventory (dictionary with items and traits)
