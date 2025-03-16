@@ -34,7 +34,7 @@ class Player:
     def set_attributes(self, character_class):
         if character_class == "medic":
             self.heal = 20
-        elif character_class == "warrior"
+        elif character_class == "warrior":
             self.attack = 20
 
     def show_profile(self):
