@@ -9,26 +9,18 @@ def mainmenu():
     print('')
     playername = input('First, please tell us who you are: ')
     print('')
-    print('Now, we need to create your character. ')
-    characterselection()
 
-#Phase 1: Character Selection (with traits and strengths)
-import json #store info?
-def characterselection():
-    print('Where do you lie, (choices) ') #put choices of character class warrior minor officer etc.
-                                        #make like hw 3 
+#Phase 1: Prelude
+#You are miner, given freedom(context), chose your path
+def Prelude():
+    print
 
 
-#Phase 2: Establish Inventory (dictionary with items and traits)
-import json
+    character_selection()
 
+#Phase 2: Character Selection (with traits and strengths)
 
-
-
-if __name__== '__main__': #so the program will run, dont delete
-    mainmenu()
-
-
+#put in function character_selection
 class Player:
     def _init_(self, name, character_class):
         self.name = name
@@ -54,8 +46,49 @@ class Player:
             print("Invalid character class")
 
     def show_profile(self):
-        return f"Name: {self.name}, Class: {self.character_class}, HP: {self.health}, 
-        Attack: {self.attack}, Heal: {self.heal}, Shield: {self.shield}, Agility: {self.agility}, Inventory: {self.inventory}"
+        return f"Name: {self.name}, Class: {self.character_class}, HP: {self.health}, Attack: {self.attack}, Heal: {self.heal}"
+    
+
+#Phase 2: Establish Inventory (dictionary with items and traits)
+class Item:
+    def __init__(self, name, damage, durability, blank):
+        self.name = name 
+        self.damage = damage
+        self.durability = durability
+        self.blank = blank #create item traits
+
+    def use(self):
+        if self.durability > 0:
+            self.durability -= 1
+            print (f'Used {self.name}, item health now {self.durability}')
+        else:
+            print(f'{self.name} is broken')
+    
+class Inventory:
+    def __init__(self):
+        self.items = []
+
+    def add_item_to_bag(self, item)
+        self.items.append(item)
+        print()
+
+Allspark=
+Matrix_of_Leadership=
+Axe= #warrior
+Sword=
+Bazooka=
+Handheld_Turret=
+Zapper= 
+Shield= #tank
+Energon=
+Medpack= #medic
+Jetpack= #aerial
+Add_Changer= #gives new transformation
+
+
+if __name__== '__main__': #so the program will run, dont delete
+    mainmenu()
+
 #Phase 2: Establish Inventory (dictionary with items and traits)
 
 #Phase 3: First Event Sequence
