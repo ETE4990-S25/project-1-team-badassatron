@@ -25,17 +25,25 @@ class Player:
     def _init_(self, name, character_class):
         self.name = name
         self.character_class = character_class
-        self.health = 100
-        self.attack = 0
-        self.heal = 0
-        self.inventory = []
+        self.health = 100 #default health
+        self.attack = 0 #default attack
+        self.heal = 0 #default heal
+        self.shield = 0 #default shield
+        self.agility = 0 #default agility
+        self.inventory = [] #Inventory starts empty
         self.set_attributes(character_class)
 
     def set_attributes(self, character_class):
-        if character_class == "medic":
+        if character_class == "Medic":
             self.heal = 20
-        elif character_class == "warrior":
+        elif character_class == "Warrior"
             self.attack = 20
+        elif character_class == "Tank"
+            self.shield = 20
+        elif character_class == "Aerial"
+            self.agility = 20
+        else:
+            print("Invalid character class")
 
     def show_profile(self):
         return f"Name: {self.name}, Class: {self.character_class}, HP: {self.health}, Attack: {self.attack}, Heal: {self.heal}"
