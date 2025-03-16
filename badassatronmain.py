@@ -7,31 +7,43 @@ def mainmenu():
     print('The instructions are simple, choose as you see fit, and see where destiny sends you.')
     print('During interactions, you will take turns attacking until one is victorious.')
     print('')
-    playername = input('First, please tell us who you are: ')
+    player.name = input('First, please tell us who you are: ')
     print('')
+    Prelude()
 
 #Phase 1: Prelude
 #You are miner, given freedom(context), chose your path
 def Prelude():
-    print
-
-
-    character_selection()
+    print('Young {player.name}, Minerbot69420, your producton of energon has been lacking and Sentinel Prime is counting on you.')
+    print(' ')
+    print('As a miner you')
+    print("   - work 14 hour work days")
+    print('   - cannot transform ')
+    print(' ')
+    print("Sentinel Prime just announced a higher quota for this week, like a cog in a machine am I right? ")
+    print('You are approached by a fellow miner about a rumor. Fellow miner, Orion Pax, has decided to revolt!')
+    print('Please {player.name}, choose the path you wish to take...')
+    print('   1. Revolt with Orion Pax and choose your destiny')
+    print('   2. Continue to work in the mines.')
+    option = input()
+    if option == '1':
+        character_selection()
+    else:
+        endgame_boring()
 
 #Phase 2: Character Selection (with traits and strengths)
-
 #put in function character_selection
-class Player:
-    def _init_(self, name, character_class):
-        self.name = name
-        self.character_class = character_class
-        self.health = 100 #default health
-        self.attack = 0 #default attack
-        self.heal = 0 #default heal
-        self.shield = 0 #default shield
-        self.agility = 0 #default agility
-        self.inventory = [] #Inventory starts empty
-        self.set_attributes(character_class)
+def character_selection():
+    class Player:
+        def _init_(self, name, character_class):
+            self.name = name
+            self.character_class = character_class
+            self.health = 100 #default health
+            self.attack = 0 #default attack            self.heal = 0 #default heal
+            self.shield = 0 #default shield
+            self.agility = 0 #default agility
+            self.inventory = [] #Inventory starts empty
+            self.set_attributes(character_class)
 
     def set_attributes(self, character_class):
         if character_class == "Medic":
@@ -49,7 +61,7 @@ class Player:
         return f"Name: {self.name}, Class: {self.character_class}, HP: {self.health}, Attack: {self.attack}, Heal: {self.heal}"
     
 
-#Phase 2: Establish Inventory (dictionary with items and traits)
+#Phase 3: Establish Inventory (dictionary with items and traits)
 class Item:
     def __init__(self, name, damage, durability, blank):
         self.name = name 
@@ -85,13 +97,12 @@ Medpack= #medic
 Jetpack= #aerial
 Add_Changer= #gives new transformation
 
+def endgame_boring():
 
 if __name__== '__main__': #so the program will run, dont delete
     mainmenu()
 
-#Phase 2: Establish Inventory (dictionary with items and traits)
 
-#Phase 3: First Event Sequence
 #Phase 4: Event Path 1
 #Phase 5: Event Path 2
 #Phase 6: Event Path 3
