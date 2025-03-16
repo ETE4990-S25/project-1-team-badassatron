@@ -13,25 +13,6 @@ def mainmenu():
     characterselection()
 
 #Phase 1: Character Selection (with traits and strengths)
-import json #store info?
-def characterselection():
-    print('Where do you lie, (choices) ') #put choices of character class warrior minor officer etc.
-                                        #make like hw 3 
-
-
-#Phase 2: Establish Inventory (dictionary with items and traits)
-import json
-
-
-
-
-if __name__== '__main__': #so the program will run, dont delete
-    mainmenu()
-
-
-
-
-
 class Player:
     def _init_(self, name, character_class):
         self.name = name
@@ -50,6 +31,15 @@ class Player:
 
     def show_profile(self):
         return f"Name: {self.name}, Class: {self.character_class}, HP: {self.health}, Attack: {self.attack}, Heal: {self.heal}"
+    
+
+#Phase 2: Establish Inventory (dictionary with items and traits)
+import json
+
+    
+if __name__== '__main__': #so the program will run, dont delete
+    mainmenu()
+
 #Phase 2: Establish Inventory (dictionary with items and traits)
 
 #Phase 3: First Event Sequence
