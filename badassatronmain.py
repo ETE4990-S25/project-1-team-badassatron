@@ -48,6 +48,39 @@ class Player:
     def show_profile(self):
         return f"Name: {self.name}, Class: {self.character_class}, HP: {self.health}, Attack: {self.attack}, Heal: {self.heal}, Shield: {self.shield}, Agility: {self.agility}"
     
+    def combat (player, enemy):
+        print(f"{player.name} faces {enemy.name} in combat!")
+
+        while player.health > 0 and enemy.health > 0:
+            action = input ("What will you do? (attack, heal, shield)")
+            if action == "attack":
+                enemy.health -= player.attack
+            # Player attacks with a weapon
+            # if player.inventory:
+            #    weapon = next((item for item in player.inventory if isinstance(item, Weapon)), None)
+            #   if weapon:
+            #      enemy.health -= weapon.damage
+            #     print(f"{player.name} attacks {enemy.name} for {weapon.damage} damage.")
+            #else:
+            #   print(f"{player.name} has no weapons!")
+            #else:
+            #   print(f"{player.name} has no items to attack with!")
+                print(f"{player.name} attacks {enemy.name} for {player.attack} damage")
+            elif action == "heal":
+                player.health += player.heal
+                print(f"{player.name} heals for {player.heal} health")
+            elif action == "shield":
+                player.health += player.shield
+                print(f"{player.name} shields for {player.shield} health")
+            else:
+                print("Invalid action")
+# Enemy attacks
+        if enemy.health > 0:
+            damage = random.randint(5, 10)
+            player.health -= damage
+            print(f"{enemy.name} attacks {player.name} for {damage} damage!")
+            print(f"{player.name} has {player.health} health left")
+            print(f"{enemy.name} has {enemy.health}
 
 #Phase 2: Establish Inventory (dictionary with items and traits)
 class Item:
@@ -89,7 +122,6 @@ Add_Changer= #gives new transformation
 if __name__== '__main__': #so the program will run, dont delete
     mainmenu()
 
-#Phase 2: Establish Inventory (dictionary with items and traits)
 
 #Phase 3: First Event Sequence
 #Phase 4: Event Path 1
