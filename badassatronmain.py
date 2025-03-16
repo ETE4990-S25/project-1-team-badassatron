@@ -18,8 +18,10 @@ def characterselection():
     print('Where do you lie, (choices) ') #put choices of character class warrior minor officer etc.
                                         #make like hw 3 
 
+
 #Phase 2: Establish Inventory (dictionary with items and traits)
 import json
+
 
 
 
