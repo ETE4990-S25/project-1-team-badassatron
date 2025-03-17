@@ -39,7 +39,8 @@ def character_selection():
             self.name = name
             self.character_class = character_class
             self.health = 100 #default health
-            self.attack = 0 #default attack            self.heal = 0 #default heal
+            self.attack = 0 #default attack            
+            self.heal = 0 #default heal
             self.shield = 0 #default shield
             self.agility = 0 #default agility
             self.inventory = [] #Inventory starts empty
@@ -131,13 +132,23 @@ Jetpack= #aerial
 Add_Changer= #gives new transformation
 
 def endgame_boring():
+print('
+    print('
+    print(
+    print(
+    print(
+    print(
 
 if __name__== '__main__': #so the program will run, dont delete
     mainmenu()
 
 
-#Phase 4: Event Path 1
-#Phase 5: Event Path 2
-#Phase 6: Event Path 3
-#Phase 7: Event Path 4
+#Phase 4: Event Path 1 Sneaking into the Iacon 5000
+
+#Phase 5: Event Path 2 Escape from Sublevel 50 with B-127
+
+#Phase 6: Event Path 3 Captured by the Cybertronian High Guard
+
+#Phase 7: Event Path 4 Exposing Sentinel to the city
+
 #Game End with Stats -> Reset and Restart
