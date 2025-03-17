@@ -149,7 +149,7 @@ Matrix_of_Leadership= Item("Matrix of Leadership",1000000, None)
 Axe= Weapon("Axe", 20, 100, None)
 Sword= Weapon("Sword", 30, 100, None)
 Bazooka= Weapon("Bazooka", 40, 100, None)
-Handheld_Turret= ("Handheld Turret", 40, 100, None)
+Handheld_Turret= Weapon("Handheld Turret", 40, 100, None)
 Zapper= Weapon("Zapper", 20, 100, None)
 Shield= Item("Shield", 200, None)
 Energon= Item("Energon", 100000, None)
@@ -158,7 +158,10 @@ Jetpack= Wearable("Jetpack", 200, None )
 Add_Changer= Wearable("Transformer", 1000000, None)
 
 def endgame_boring():
-    print("Ending: Boring ass...")
+    print("Ending: You continue to work in the mines. Orion Pax's revolt is crushed before it even begins and more miners are succumbing to the harsh conditions.")
+    print("As time goes on, the energon reserves are depleted and the planet is dying. You are one of the last surviving Cybertronians.")
+    print("It is revealed that Sentinel Prime was offloading the energon to the Quintessons, enemies to the planet of Cybertron.")
+    print("Sentinel Prime, in his greed to claim leadership from the 13 Primes, has doomed the planet and its inhabitants.")
 
 def ending_prime():
     print("We are honored to make you a prime.")
