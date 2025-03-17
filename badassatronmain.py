@@ -180,18 +180,302 @@ def ending_decepticon():
 
 def ending_megatron():
     print('Inspired by the fallen leader, Megatronus Prime, you have taken the name Megatron.')
-    print('')
+    print('Through your actions, you have shown that the Autobots are not to be trusted with the fate of Cybertron.')
+    print('You attempt to take the Matrix of Leadership, but it rejects you. You are bitter towards Orion Pax, for who you believe is too weak to lead Cybertron.')
 
 if __name__== '__main__': #so the program will run, dont delete
     mainmenu()
 
 
 #Phase 4: Event Path 1 Sneaking into the Iacon 5000
+    def sneak_into_iacon_5000():
+        print("Welcome to the Iacon 5000, the best race in all of Cybertron!")
+        print("You have an important decision to make.")
+        print("Orion Pax has a plan to sneak into the Iacon 5000 and make a name for the minerbots.")
+
+        choice = input("Do you want to join Orion Pax and equip a jet pack to race? (yes/no): ").lower()
+
+        if choice == "yes":
+            print("You decided to join Orion Pax and equip a jet pack for the race.")
+            print("With your jet pack, you fly past the competition, winning the race!")
+            print("The crowd goes wild that two minerbots have won the Iacon 5000 without the ability to transform.")
+        elif choice == "no":
+            print("\nYou decided not to join Orion Pax and watch from the sidelines.")
+            print("You still enter the race, but without the jet pack, you fall terribly behind!")
+            print("Your loss is a disappointment and the transformers laugh at you and Orion Pax for trying to race")
+        else:
+            print("Invalid input. Please type 'yes' or 'no'.")
+            sneak_into_iacon_5000()
 
 #Phase 5: Event Path 2 Escape from Sublevel 50 with B-127
 
+    def battle_choice():
+        print("\nYou are now being attacked by random invaders while on the cargo train!")
+        print("Choose an item from your inventory to use in the battle:")
+    
+        # Display available inventory items
+        for i, item in enumerate(inventory, 1):
+            print(f"{i}. {item}")
+    
+        # Ask player to choose an item
+        choice = int(input("\nEnter the number of the item you wish to use: "))
+        
+        if choice == 1:
+        print("\nYou equipped __Axe__! You swing the axe at the invaders as they approach!")
+        result = #put something here
+        if result == "win":
+            print(
+        else:
+            print(
+    elif choice == 2:
+        print("\nYou equipped ...
+        result = #put something here
+        if result == "win":
+            print(""
+        else
+            print(""
+    else:
+        print("\nInvalid choice! You hesitate and are caught off guard by the invaders!")
+
+    
+    def escape_from_sublevel_50():
+        print("You and Orion Pax are kicked down to Sublevel 50 by one of Sentinel Prime's guards.")
+        print("As you tumble down, you land in the depths of Cybertron, in a dark and eerie sector filled with old mining equipment.")
+    
+        print("Here, you meet B-127, a friendly miner bot in charge of all the scrap metal. B-127 explains that he's been working here alone, building sculptures out of old parts.")
+        print("As you interact with B-127, you accidentally knock into one of his friends and their head falls off, popping out a disc.")
+    
+        print("B-127 plays the disc for you. It's a **distress message** from the legendary **Alpha Trion**. The message reveals that the Primes are on a mission and they were told to meet in a cave, "
+          "with coordinates pointing to the surface of Cybertron.")
+    
+        print("This discovery fills you with determination. You and Orion Pax decide to set course for the surface to uncover the truth behind what happened to the Primes.")
+        print("On your way out of Sublevel 50, you encounter another robot named **Elita**, a warrior who shares your interest in finding out the truth.")
+    
+        print("Now, the three of you venture out of your comfort zones to unravel the mysteries of Cybertron and the disappearance of the Primes.")
+        print("You hop aboard a cargo train carrying loads of **Energon** on a path to the surface of Cybertron.")
+
+        print("But as the train speeds through the tunnels, your group is suddenly attacked by **random invaders**! They think you're looting the energon!")
+
+        battle_choice()
+
 #Phase 6: Event Path 3 Captured by the Cybertronian High Guard
 
+def battle_choice2():
+    print("\nYou are captured by the Cybertronian High Guard. You must decide what to do next.")
+    print("Do you fight Starscream to create a batallion or give your respect to the High Guard?")
+    
+    choice = input("Choose an option:\nA) Fight Starscream and create a batallion.\nB) Give your respect to the High Guard and let someone else take charge.\nEnter A or B: ").lower()
+
+    if choice == "a":
+        print("\nYou chose to fight Starscream and create a batallion.")
+        print("You rally the Cybertronian High Guard to your cause, promising that together, you will overthrow Sentinel Prime.")
+        print("Starscream, seeing the growing rebellion, challenges you to a final showdown!")
+        
+        # Simulate the outcome of the battle
+        battle_result = random.choice(["win", "lose"])
+        
+        if battle_result == "win":
+            print("\nYour resolve and leadership inspire the High Guard. You defeat Starscream, and the batallion stands for you!")
+            print("The tide begins to turn as more Cybertronians join your cause.")
+        else:
+            print("\nDespite your efforts, Starscream's ruthless tactics overpower you, and you are crushed.")
+            print("The resistance is scattered, and you are forced to retreat.")
+    
+    elif choice == "b":
+        print("\nYou chose to give your respect to the High Guard and let someone else take charge.")
+        print("You acknowledge the wisdom of the High Guard and trust them to lead the way back to Iacon City.")
+        print("Together, you manage to stay out of Sentinel Prime's reach, and the journey back begins.")
+        print("However, the fight against Sentinel’s rule is far from over. The High Guard will need time to gather strength.")
+    else:
+        print("\nInvalid choice! Please select 'A' or 'B'.")
+
+def cybertronian_high_guard_encounter():
+    print("You arrive at the cave where the truth is revealed.")
+    print("As you and your group carefully step inside, you see the **deactivated Alpha Trion** alongside the **corpses of the 12 other Primes**.")
+    print("Your heart sinks at the sight of the fallen heroes of Cybertron.")
+    
+    print("\nYou manage to reactivate Alpha Trion using some **Energon** you saved from the cargo train you narrowly escaped earlier.")
+    print("As his systems power back online, Alpha Trion looks at you with weary eyes.")
+    
+    print("\nAlpha Trion reveals the truth: **Sentinel Prime** was the cause of the Primes' demise. He set them up in a cruel trap to steal the **Matrix of Leadership** and take control of Cybertron for himself.")
+    print("Sentinel, however, was unworthy to wield the Matrix, and as a result, it rejected him, becoming lost in the chaos. With no Primes left to lead, the planet stopped producing Energon.")
+    
+    print("\nThis loss of Energon prompted Sentinel to devise a sickening plan to remove the cogs from many Transformers and reprogram them as **miner bots**, forcing them to harvest the remaining Energon reserves deep within the planet.")
+    print("\nYou are filled with anger at this realization, and before you can speak, you hear the sound of **Sentinel Prime's guards** closing in on your location.")
+    
+    print("\nAlpha Trion, realizing the urgency, quickly hands you, Orion Pax, B-127, and Elita the **cogs of the fallen Primes**. He urges you to escape before it's too late.")
+    
+    print("\nYou make your way out of the cave, but as you try to hide, you run into the **Cybertronian High Guard**—a group of warriors thought to be long gone alongside the Primes.")
+    print("They are scared of what Sentinel would do to them and the invading **Quintessons** if they are discovered. The High Guard captures your group and are in a stalement on what to do with 4 puny minerbots.")
+
+    # Let the player make a choice for the next course of action
+    battle_choice2()
+
 #Phase 7: Event Path 4 Exposing Sentinel to the city
+import random
+
+# Define player and enemy stats
+player_health = 100
+arachnid_health = 150
+sentinel_health = 100
+
+# Define a function for the battle with Arachnid (3 rounds)
+def battle_arachnid():
+    global player_health, arachnid_health
+    
+     print("\nYour group has made their way to Iacon City. It is here where you face off against Arachnid!")
+    print(f"Arachnid's Health: {arachnid_health} | Your Health: {player_health}")
+    print("\nArachnid is a fierce opponent, quick to strike and relentless in combat.")
+    
+    rounds = 3
+    for round in range(1, rounds + 1):
+        print(f"\nRound {round} begins!")
+        print(f"Arachnid's Health: {arachnid_health} | Your Health: {player_health}")
+        
+        # Let the player choose an item from their inventory
+        print("\nChoose an item from your inventory to use in this round:")
+        for i, item in enumerate(inventory, 1):
+            print(f"{i}. {item}")
+        choice = int(input("\nEnter the number of the item you wish to use: "))
+        
+        if choice == 1:
+            print("\nYou equip the Laser Sword and charge at Arachnid!")
+            damage = random.randint(15, 30)
+            arachnid_health -= damage
+            print(f"You hit Arachnid for {damage} damage!")
+        elif choice == 2:
+            print("\nYou equip the Energy Shield and brace for Arachnid's attack!")
+            damage = random.randint(5, 15)
+            player_health -= damage
+            print(f"Arachnid attacks you for {damage} damage!")
+        elif choice == 3:
+            print("\nYou use the Repair Kit to heal yourself!")
+            heal = random.randint(10, 20)
+            player_health += heal
+            print(f"You heal for {heal} health!")
+        elif choice == 4:
+            print("\nYou use the Holo-map to strategize your next move!")
+            damage = random.randint(10, 20)
+            arachnid_health -= damage
+            print(f"You use the Holo-map to outsmart Arachnid and deal {damage} damage!")
+        elif choice == 5:
+            print("\nYou use the Jet Pack to dodge Arachnid's attacks!")
+            damage = random.randint(5, 10)
+            arachnid_health -= damage
+            print(f"You evade and strike back with a quick attack, dealing {damage} damage!")
+        else:
+            print("\nInvalid choice! Arachnid takes advantage of your hesitation!")
+            damage = random.randint(20, 30)
+            player_health -= damage
+            print(f"Arachnid attacks you for {damage} damage!")
+
+        # Check if either combatant's health reaches 0
+        if arachnid_health <= 0:
+            print("\nYou have defeated Arachnid!")
+            return "win"
+        if player_health <= 0:
+            print("\nYou have been defeated by Arachnid.")
+            return "lose"
+    
+    if player_health > 0:
+        print("\nYou defeated Arachnid in 3 rounds!")
+        return "win"
+    else:
+        print("\nYou failed to defeat Arachnid.")
+        return "lose"
+
+# Define a function for the final battle with Sentinel Prime (1 round)
+def battle_sentinel():
+    global player_health, sentinel_health
+    
+    print("\nNow you face **Sentinel Prime** in a final battle!")
+    print(f"Sentinel Prime's Health: {sentinel_health} | Your Health: {player_health}")
+    
+    # Let the player choose an item from their inventory for the final battle
+    print("\nChoose an item from your inventory to use in this final round:")
+    for i, item in enumerate(inventory, 1):
+        print(f"{i}. {item}")
+    choice = int(input("\nEnter the number of the item you wish to use: "))
+    
+    if choice == 1:
+        print("\nYou equip the Laser Sword and charge at Sentinel Prime!")
+        damage = random.randint(20, 40)
+        sentinel_health -= damage
+        print(f"You hit Sentinel Prime for {damage} damage!")
+    elif choice == 2:
+        print("\nYou equip the Energy Shield to defend against Sentinel Prime's attack!")
+        damage = random.randint(15, 25)
+        player_health -= damage
+        print(f"Sentinel Prime attacks you for {damage} damage!")
+    elif choice == 3:
+        print("\nYou use the Repair Kit to heal yourself!")
+        heal = random.randint(20, 30)
+        player_health += heal
+        print(f"You heal for {heal} health!")
+    elif choice == 4:
+        print("\nYou use the Holo-map to confuse Sentinel Prime!")
+        damage = random.randint(15, 30)
+        sentinel_health -= damage
+        print(f"Sentinel Prime is confused, and you deal {damage} damage!")
+    elif choice == 5:
+        print("\nYou use the Jet Pack to evade Sentinel Prime's attacks!")
+        damage = random.randint(10, 20)
+        sentinel_health -= damage
+        print(f"You strike while dodging and deal {damage} damage to Sentinel Prime!")
+    else:
+        print("\nInvalid choice! Sentinel Prime takes advantage of your hesitation!")
+        damage = random.randint(30, 50)
+        player_health -= damage
+        print(f"Sentinel Prime attacks you for {damage} damage!")
+    
+    # Check the health after the battle
+    if sentinel_health <= 0 and player_health > 0:
+        print("\nYou have defeated **Sentinel Prime**!")
+        return "win"
+    elif player_health <= 0:
+        print("\nYou have been defeated by **Sentinel Prime**.")
+        return "lose"
+    else:
+        print("\nThe battle is still ongoing. But it looks like you're both on the edge!")
+        return "ongoing"
+
+# Define a function to make the final choice (Kill or Spare Sentinel Prime)
+def final_choice():
+    choice = input("\n**Sentinel Prime** is at your mercy. What will you do?\nA) Kill Sentinel Prime and start the Decepticon Faction\nB) Spare Sentinel Prime and take him to trial for his crimes against Cybertron\nEnter A or B: ").lower()
+    
+    if choice == "a":
+        print("\nYou have chosen to kill **Sentinel Prime**. With his death, you take control of the Decepticon Faction.")
+        print("The war for Cybertron continues, but you will shape its future with an iron fist!")
+    elif choice == "b":
+        print("\nYou have chosen to spare **Sentinel Prime** and take him to trial.")
+        print("Despite his actions, you believe in justice. You take him back to Iacon City for trial, hoping to restore balance to Cybertron.")
+    else:
+        print("\nInvalid choice! No action was taken.")
+        
+# Main event function
+def main_event():
+    global player_health, arachnid_health, sentinel_health
+    
+    # Start the battle with Arachnid
+    arachnid_battle_result = battle_arachnid()
+    
+    if arachnid_battle_result == "win":
+        print("\nYou have successfully defeated Arachnid! Now you face **Sentinel Prime**.")
+        sentinel_battle_result = battle_sentinel()
+        
+        if sentinel_battle_result == "win":
+            final_choice()
+        elif sentinel_battle_result == "lose":
+            print("\nYou were defeated by **Sentinel Prime**. The fate of Cybertron is uncertain.")
+        else:
+            print("\nThe battle with **Sentinel Prime** is still ongoing. Your fate rests on the edge of the blade!")
+    else:
+        print("\nYou were defeated by Arachnid, and now the fate of Cybertron is uncertain.")
+        
+# Call the main event function to start the game
+main_event()
 
 #Game End with Stats -> Reset and Restart
+def game_end():
+    print("\nThank you for playing Savior of Cybertron!")
+    print( #put ending type here
