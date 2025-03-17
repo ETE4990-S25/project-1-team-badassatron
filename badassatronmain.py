@@ -164,16 +164,23 @@ def endgame_boring():
     print("Sentinel Prime, in his greed to claim leadership from the 13 Primes, has doomed the planet and its inhabitants.")
 
 def ending_prime():
-    print("We are honored to make you a prime.")
+    print("Because of your integrity and bravery, you have been chosen to be the next Prime. You have saved Cybertron from the brink of destruction.")
+    print("You have been granted the Matrix of Leadership. With it, the planet can now flow energon freely and the inhabitants can thrive once more.")
+    print("Miner bots rejoice and hail you as 'Omega Prime'.")
 
 def ending_autobot():
-    print('It is admirable you chose this path.')
+    print('You have chosen to take Sentinel Prime into custody and take him to trial for his crimes against Cybertron.')
+    print('It is admirable you have chose this path. You make a good recruit alongside the Autobots.')
+    print('With Orion Pax as the new Prime, the Autobots will lead Cybertron to a new era of peace and prosperity.')
 
 def ending_decepticon():
-    print('Revenge is the only answer, welcome.')
+    print('Revenge is the only answer, welcome to the decepticons. Megatron is pleased that you have ended the reign of Sentinel Prime.')
+    print('Orion Pax is weak and will not be able to lead Cybertron to a new era of peace and prosperity.')
+    print('The Decepticons will rule Cybertron with an iron fist.')
 
 def ending_megatron():
-    print('I want only the strongest by my side, good job.')
+    print('Inspired by the fallen leader, Megatronus Prime, you have taken the name Megatron.')
+    print('')
 
 if __name__== '__main__': #so the program will run, dont delete
     mainmenu()
