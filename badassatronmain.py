@@ -1,5 +1,7 @@
 #game start
 
+import random
+
 def mainmenu():
     print('-----Savior of Cybertron----')
     print('Hello citizen, Crybertron needs your help. ')
@@ -7,22 +9,22 @@ def mainmenu():
     print('The instructions are simple, choose as you see fit, and see where destiny sends you.')
     print('During interactions, you will take turns attacking until one is victorious.')
     print('')
-    player.name = input('First, please tell us who you are: ')
+    player = input('First, please tell us who you are: ')
     print('')
     Prelude()
 
 #Phase 1: Prelude
 #You are miner, given freedom(context), chose your path
 def Prelude():
-    print('Young {player.name}, Minerbot69420, your producton of energon has been lacking and Sentinel Prime is counting on you.')
+    print('Young {player}, Minerbot69420, your producton of energon has been lacking and Sentinel Prime is counting on you.')
     print(' ')
     print('As a miner you')
     print("   - work 14 hour work days")
     print('   - cannot transform ')
     print(' ')
     print("Sentinel Prime just announced a higher quota for this week, like a cog in a machine am I right? ")
-    print('You are approached by a fellow miner about a rumor. Fellow miner, Orion Pax, has decided to revolt!')
-    print('Please {player.name}, choose the path you wish to take...')
+    print('You are approached by another bot about a rumor. Fellow miner, Orion Pax, has decided to revolt!')
+    print('Please {player}, choose the path you wish to take...')
     print('   1. Revolt with Orion Pax and choose your destiny')
     print('   2. Continue to work in the mines.')
     option = input()
@@ -33,7 +35,7 @@ def Prelude():
 
 #Phase 2: Character Selection (with traits and strengths)
 #put in function character_selection
-def character_selection():
+def character_selection(): #move above menu so it can be called out 
     class Player:
         def _init_(self, name, character_class):
             self.name = name
@@ -92,13 +94,13 @@ def character_selection():
             player.health -= damage
             print(f"{enemy.name} attacks {player.name} for {damage} damage!")
             print(f"{player.name} has {player.health} health left")
-            print(f"{enemy.name} has {enemy.health}
+            print(f"{enemy.name} has {enemy.health}")
+            
 
 #Phase 3: Establish Inventory (dictionary with items and traits)
 class Item:
-    def __init__(self, name, damage, durability, blank):
+    def __init__(self, name, durability, blank):
         self.name = name 
-        self.damage = damage
         self.durability = durability
         self.blank = blank #create item traits
 
@@ -108,29 +110,66 @@ class Item:
             print (f'Used {self.name}, item health now {self.durability}')
         else:
             print(f'{self.name} is broken')
-    
+class Weapon(Item):
+    def __init__(self,name, durability, blank, damage):
+        super().__init__(name, durability, blank) #Will add functions after we figure out more story
+        self.damage = damage
+class Wearable(Item):
+    def __init__(self,name, durability, blank):
+        super().__init__(name, durability, blank) #Will add functions after we figure out more story
+
 class Inventory:
     def __init__(self):
-        self.items = []
+        self.items = [] #when player chooses character, items automatically added to inventory
 
-    def add_item_to_bag(self, item)
+    def add_item_to_pack(self, item):
         self.items.append(item)
-        print()
+        print(f'{item.name} has been added to your pack')
 
-Allspark=
-Matrix_of_Leadership=
-Axe= #warrior
-Sword=
-Bazooka=
-Handheld_Turret=
-Zapper= 
-Shield= #tank
-Energon=
-Medpack= #medic
-Jetpack= #aerial
-Add_Changer= #gives new transformation
+    def remove_item(self,item):
+        if item in self.items:
+            self.items.remove(item)
+            print(f'{item.name} has been removed from your pack')
+        else:
+            print(f'{item.name} is not in your pack.')
+
+    def use_item(self,item):
+        if item in self.items:
+            item.use()
+            item.durability  -= 10
+        else:
+            print(f'{item.name} is not in your pack.')
+
+player_inventory = Inventory()
+
+#item list
+Allspark= Item("Allspark", 1000000, None)
+Matrix_of_Leadership= Item("Matrix of Leadership",1000000, None)
+Axe= Weapon("Axe", 20, 100, None)
+Sword= Weapon("Sword", 30, 100, None)
+Bazooka= Weapon("Bazooka", 40, 100, None)
+Handheld_Turret= ("Handheld Turret", 40, 100, None)
+Zapper= Weapon("Zapper", 20, 100, None)
+Shield= Item("Shield", 200, None)
+Energon= Item("Energon", 100000, None)
+Medpack= Item("Medpack", 100, None)
+Jetpack= Wearable("Jetpack", 200, None )
+Add_Changer= Wearable("Transformer", 1000000, None)
 
 def endgame_boring():
+    print("Ending: Boring ass...")
+
+def ending_prime():
+    print("We are honored to make you a prime.")
+
+def ending_autobot():
+    print('It is admirable you chose this path.')
+
+def ending_decepticon():
+    print('Revenge is the only answer, welcome.')
+
+def ending_megatron():
+    print('I want only the strongest by my side, good job.')
 
 if __name__== '__main__': #so the program will run, dont delete
     mainmenu()
