@@ -51,7 +51,7 @@ def combat (player, enemy):
         print(f"{player.name} has {player.health} health left")
         print(f"{enemy.name} has {enemy.health}")
 
-#Phase 1: Start      
+#Phase 1: Start    
 def mainmenu():
     print('-----Savior of Cybertron----')
     print('Hello citizen, Crybertron needs your help. ')
@@ -80,8 +80,11 @@ def Prelude(player_name):
     option = input()
     if option == '1':
         character_selection(player_name)
+    elif option == '2':
+        endgame_boring(player_name)
     else:
-        endgame_boring()
+        print("Invalid input. Please choose option 1 or 2.")
+        Prelude(player_name)
 
 #Phase 3: Establish Inventory (dictionary with items and traits)
 def character_selection(player_name): 
@@ -107,7 +110,7 @@ def character_selection(player_name):
 
     player = Player(player_name, character_class)
     print(player.show_profile())
-    sneak_into_iacon_5000(player)
+    sneak_into_iacon_5000(player_name)
 
 class Item:
     def __init__(self, name, durability, blank):
@@ -167,35 +170,41 @@ Medpack= Item("Medpack", 100, None)
 Jetpack= Wearable("Jetpack", 200, None )
 Add_Changer= Wearable("Transformer", 1000000, None)
 
-if __name__== '__main__': #so the program will run, dont delete
-    mainmenu()
-    
-def endgame_boring():
-    print("Ending: You continue to work in the mines. Orion Pax's revolt is crushed before it even begins and more miners are succumbing to the harsh conditions.")
+def endgame_boring(player_name):
+    print('-----------------------------------------------------------------------------------')
+    print("Boring Ending:")
+    print("You continue to work in the mines. Orion Pax's revolt is crushed before it even begins and more miners are succumbing to the harsh conditions.")
     print("As time goes on, the energon reserves are depleted and the planet is dying. You are one of the last surviving Cybertronians.")
     print("It is revealed that Sentinel Prime was offloading the energon to the Quintessons, enemies to the planet of Cybertron.")
     print("Sentinel Prime, in his greed to claim leadership from the 13 Primes, has doomed the planet and its inhabitants.")
+    End_menu() #send to end menu to view stats and have restart option
 
 def ending_prime():
+    print('-----------------------------------------------------------------------------------')
     print("Because of your integrity and bravery, you have been chosen to be the next Prime. You have saved Cybertron from the brink of destruction.")
     print("You have been granted the Matrix of Leadership. With it, the planet can now flow energon freely and the inhabitants can thrive once more.")
     print("Miner bots rejoice and hail you as 'Omega Prime'.")
 
 def ending_autobot():
+    print('-----------------------------------------------------------------------------------')
     print('You have chosen to take Sentinel Prime into custody and take him to trial for his crimes against Cybertron.')
     print('It is admirable you have chose this path. You make a good recruit alongside the Autobots.')
     print('With Orion Pax as the new Prime, the Autobots will lead Cybertron to a new era of peace and prosperity.')
 
 def ending_decepticon():
+    print('-----------------------------------------------------------------------------------')
     print('Revenge is the only answer, welcome to the decepticons. Megatron is pleased that you have ended the reign of Sentinel Prime.')
     print('Orion Pax is weak and will not be able to lead Cybertron to a new era of peace and prosperity.')
     print('The Decepticons will rule Cybertron with an iron fist.')
 
 def ending_megatron():
+    print('-----------------------------------------------------------------------------------')
     print('Inspired by the fallen leader, Megatronus Prime, you have taken the name Megatron.')
     print('Through your actions, you have shown that the Autobots are not to be trusted with the fate of Cybertron.')
     print('You attempt to take the Matrix of Leadership, but it rejects you. You are bitter towards Orion Pax, for who you believe is too weak to lead Cybertron.')
 
+if __name__== '__main__': #so the program will run, dont delete
+    mainmenu()
 
 #Phase 4: Event Path 1 Sneaking into the Iacon 5000
 def sneak_into_iacon_5000():
