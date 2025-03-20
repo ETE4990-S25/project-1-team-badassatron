@@ -1,20 +1,16 @@
-#game start
-
 import random
 
-#Phase 2: Character Selection (with traits and strengths)
-#put in function character_selection
-def character_selection(): #move above menu so it can be called out 
-    class Player:
-        def _init_(self, name, character_class):
-            self.name = name
-            self.character_class = character_class
-            self.health = 100 #default health
-            self.attack = 0 #default attack            self.heal = 0 #default heal
-            self.shield = 0 #default shield
-            self.agility = 0 #default agility
-            self.inventory = [] #Inventory starts empty
-            self.set_attributes(character_class)
+
+class Player:
+    def __init__(self, name, character_class):
+        self.name = name
+        self.character_class = character_class
+        self.health = 100 #default health
+        self.attack = 0 #default attack            self.heal = 0 #default heal
+        self.shield = 0 #default shield
+        self.agility = 0 #default agility
+        self.inventory = [] #Inventory starts empty
+        self.set_attributes(character_class)
 
     def set_attributes(self, character_class):
         if character_class == "Medic":
@@ -31,40 +27,31 @@ def character_selection(): #move above menu so it can be called out
     def show_profile(self):
         return f"Name: {self.name}, Class: {self.character_class}, HP: {self.health}, Attack: {self.attack}, Heal: {self.heal}, Shield: {self.shield}, Agility: {self.agility}"
     
-    def combat (player, enemy):
-        print(f"{player.name} faces {enemy.name} in combat!")
+def combat (player, enemy):
+    print(f"{player.name} faces {enemy.name} in combat!")
 
-        while player.health > 0 and enemy.health > 0:
-            action = input ("What will you do? (attack, heal, shield)")
-            if action == "attack":
-                enemy.health -= player.attack
-            # Player attacks with a weapon
-            # if player.inventory:
-            #    weapon = next((item for item in player.inventory if isinstance(item, Weapon)), None)
-            #   if weapon:
-            #      enemy.health -= weapon.damage
-            #     print(f"{player.name} attacks {enemy.name} for {weapon.damage} damage.")
-            #else:
-            #   print(f"{player.name} has no weapons!")
-            #else:
-            #   print(f"{player.name} has no items to attack with!")
-                print(f"{player.name} attacks {enemy.name} for {player.attack} damage")
-            elif action == "heal":
-                player.health += player.heal
-                print(f"{player.name} heals for {player.heal} health")
-            elif action == "shield":
-                player.health += player.shield
-                print(f"{player.name} shields for {player.shield} health")
-            else:
-                print("Invalid action")
+    while player.health > 0 and enemy.health > 0:
+        action = input ("What will you do? (attack, heal, shield)")
+        if action == "attack":
+            enemy.health -= player.attack
+            print(f"{player.name} attacks {enemy.name} for {player.attack} damage")
+        elif action == "heal":
+            player.health += player.heal
+            print(f"{player.name} heals for {player.heal} health")
+        elif action == "shield":
+            player.health += player.shield
+            print(f"{player.name} shields for {player.shield} health")
+        else:
+            print("Invalid action")
 # Enemy attacks
-        if enemy.health > 0:
-            damage = random.randint(5, 10)
-            player.health -= damage
-            print(f"{enemy.name} attacks {player.name} for {damage} damage!")
-            print(f"{player.name} has {player.health} health left")
-            print(f"{enemy.name} has {enemy.health}")
-            
+    if enemy.health > 0:
+        damage = random.randint(5, 10)
+        player.health -= damage
+        print(f"{enemy.name} attacks {player.name} for {damage} damage!")
+        print(f"{player.name} has {player.health} health left")
+        print(f"{enemy.name} has {enemy.health}")
+
+#Phase 1: Start      
 def mainmenu():
     print('-----Savior of Cybertron----')
     print('Hello citizen, Crybertron needs your help. ')
@@ -72,14 +59,14 @@ def mainmenu():
     print('The instructions are simple, choose as you see fit, and see where destiny sends you.')
     print('During interactions, you will take turns attacking until one is victorious.')
     print('')
-    player = input('First, please tell us who you are: ')
+    name = input('First, please tell us who you are: ')
     print('')
-    Prelude()
+    Prelude(name)
 
-#Phase 1: Prelude
-#You are miner, given freedom(context), chose your path
-def Prelude():
-    print('Young {player}, Minerbot69420, your producton of energon has been lacking and Sentinel Prime is counting on you.')
+#Phase 2: Prelude
+def Prelude(player_name):
+    print('-----------------------------------------------------------------------------------')
+    print(f'Young {player_name}, Minerbot69420, your producton of energon has been lacking and Sentinel Prime is counting on you.')
     print(' ')
     print('As a miner you')
     print("   - work 14 hour work days")
@@ -87,16 +74,41 @@ def Prelude():
     print(' ')
     print("Sentinel Prime just announced a higher quota for this week, like a cog in a machine am I right? ")
     print('You are approached by another bot about a rumor. Fellow miner, Orion Pax, has decided to revolt!')
-    print('Please {player}, choose the path you wish to take...')
+    print(f'Please {player_name}, choose the path you wish to take...')
     print('   1. Revolt with Orion Pax and choose your destiny')
     print('   2. Continue to work in the mines.')
     option = input()
     if option == '1':
-        character_selection()
+        character_selection(player_name)
     else:
         endgame_boring()
 
 #Phase 3: Establish Inventory (dictionary with items and traits)
+def character_selection(player_name): 
+    print('-----------------------------------------------------------------------------------')
+    print('Choose your character class: ')
+    print("1. Medic")
+    print("2. Warrior")
+    print("3. Tank ")
+    print("4. Aerial")
+    choice = input("Please input the number corresponding with your choice: ")
+
+    if choice == "1":
+        character_class = "Medic"
+    elif choice == "2":
+        character_class = "Warrior"
+    elif choice == "3":
+        character_class = "Tank"
+    elif choice == "4":
+        character_class = "Aerial"
+    else:
+        print("Input invalid, setting default class to Warrior")
+        character_class = "Warrior"
+
+    player = Player(player_name, character_class)
+    print(player.show_profile())
+    sneak_into_iacon_5000(player)
+
 class Item:
     def __init__(self, name, durability, blank):
         self.name = name 
@@ -155,6 +167,9 @@ Medpack= Item("Medpack", 100, None)
 Jetpack= Wearable("Jetpack", 200, None )
 Add_Changer= Wearable("Transformer", 1000000, None)
 
+if __name__== '__main__': #so the program will run, dont delete
+    mainmenu()
+    
 def endgame_boring():
     print("Ending: You continue to work in the mines. Orion Pax's revolt is crushed before it even begins and more miners are succumbing to the harsh conditions.")
     print("As time goes on, the energon reserves are depleted and the planet is dying. You are one of the last surviving Cybertronians.")
@@ -183,24 +198,24 @@ def ending_megatron():
 
 
 #Phase 4: Event Path 1 Sneaking into the Iacon 5000
-    def sneak_into_iacon_5000():
-        print("Welcome to the Iacon 5000, the best race in all of Cybertron!")
-        print("You have an important decision to make.")
-        print("Orion Pax has a plan to sneak into the Iacon 5000 and make a name for the minerbots.")
+def sneak_into_iacon_5000():
+    print("Welcome to the Iacon 5000, the best race in all of Cybertron!")
+    print("You have an important decision to make.")
+    print("Orion Pax has a plan to sneak into the Iacon 5000 and make a name for the minerbots.")
 
-        choice = input("Do you want to join Orion Pax and equip a jet pack to race? (yes/no): ").lower()
+    choice = input("Do you want to join Orion Pax and equip a jet pack to race? (yes/no): ").lower()
 
-        if choice == "yes":
-            print("You decided to join Orion Pax and equip a jet pack for the race.")
-            print("With your jet pack, you fly past the competition, winning the race!")
-            print("The crowd goes wild that two minerbots have won the Iacon 5000 without the ability to transform.")
-        elif choice == "no":
-            print("\nYou decided not to join Orion Pax and watch from the sidelines.")
-            print("You still enter the race, but without the jet pack, you fall terribly behind!")
-            print("Your loss is a disappointment and the transformers laugh at you and Orion Pax for trying to race")
-        else:
-            print("Invalid input. Please type 'yes' or 'no'.")
-            sneak_into_iacon_5000()
+    if choice == "yes":
+        print("You decided to join Orion Pax and equip a jet pack for the race.")
+        print("With your jet pack, you fly past the competition, winning the race!")
+        print("The crowd goes wild that two minerbots have won the Iacon 5000 without the ability to transform.")
+    elif choice == "no":
+        print("\nYou decided not to join Orion Pax and watch from the sidelines.")
+        print("You still enter the race, but without the jet pack, you fall terribly behind!")
+        print("Your loss is a disappointment and the transformers laugh at you and Orion Pax for trying to race")
+    else:
+        print("Invalid input. Please type 'yes' or 'no'.")
+        
 
 #Phase 5: Event Path 2 Escape from Sublevel 50 with B-127
 
@@ -216,21 +231,21 @@ def ending_megatron():
         choice = int(input("\nEnter the number of the item you wish to use: "))
         
         if choice == 1:
-        print("\nYou equipped __Axe__! You swing the axe at the invaders as they approach!")
-        result = #put something here
-        if result == "win":
-            print(
+            print("\nYou equipped __Axe__! You swing the axe at the invaders as they approach!")
+            result = ("YAY AXE")#put something here
+            if result == "win":
+                print("win")
+        elif choice == 2:
+            print("lose")
+        elif choice == 3:
+            print("\nYou equipped ...")
+            result = ("i equipped somethin")#put something here
+            if result == "win":
+                print("")
+            else:
+                print("")
         else:
-            print(
-    elif choice == 2:
-        print("\nYou equipped ...
-        result = #put something here
-        if result == "win":
-            print(""
-        else
-            print(""
-    else:
-        print("\nInvalid choice! You hesitate and are caught off guard by the invaders!")
+            print("\nInvalid choice! You hesitate and are caught off guard by the invaders!")
 
     
     def escape_from_sublevel_50():
@@ -318,7 +333,7 @@ sentinel_health = 100
 def battle_arachnid():
     global player_health, arachnid_health
     
-     print("\nYour group has made their way to Iacon City. It is here where you face off against Arachnid!")
+    print("\nYour group has made their way to Iacon City. It is here where you face off against Arachnid!")
     print(f"Arachnid's Health: {arachnid_health} | Your Health: {player_health}")
     print("\nArachnid is a fierce opponent, quick to strike and relentless in combat.")
     
@@ -473,7 +488,5 @@ main_event()
 #Game End with Stats -> Reset and Restart
 def game_end():
     print("\nThank you for playing Savior of Cybertron!")
-    print( #put ending type here
-        
-if __name__== '__main__': #so the program will run, dont delete
-    mainmenu()
+    print("put ending here") #put ending type here
+
