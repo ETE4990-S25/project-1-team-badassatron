@@ -5,7 +5,8 @@ class Player:
         self.name = name
         self.character_class = character_class
         self.health = 100 #default health
-        self.attack = 0 #default attack            self.heal = 0 #default heal
+        self.attack = 0 #default attack            
+        self.heal = 0 #default heal
         self.shield = 0 #default shield
         self.agility = 0 #default agility
         self.inventory = [] #Inventory starts empty
@@ -203,7 +204,8 @@ def ending_megatron():
     print('You attempt to take the Matrix of Leadership, but it rejects you. You are bitter towards Orion Pax, for who you believe is too weak to lead Cybertron.')
 
 #Phase 4: Event Path 1 Sneaking into the Iacon 5000
-def sneak_into_iacon_5000():
+def sneak_into_iacon_5000(player_name):
+    print('-----------------------------------------------------------------------------------')
     print("Welcome to the Iacon 5000, the best race in all of Cybertron!")
     print("You have an important decision to make.")
     print("Orion Pax has a plan to sneak into the Iacon 5000 and make a name for the minerbots.")
@@ -220,18 +222,38 @@ def sneak_into_iacon_5000():
         print("Your loss is a disappointment and the transformers laugh at you and Orion Pax for trying to race")
     else:
         print("Invalid input. Please type 'yes' or 'no'.")
-        
-if __name__== '__main__': #so the program will run, dont delete
-    mainmenu()
-    
-#Phase 5: Event Path 2 Escape from Sublevel 50 with B-127
+    escape_from_sublevel_50(player_name)
 
-    def battle_choice():
+#Phase 5: Event Path 2 Escape from Sublevel 50 with B-127
+    
+def escape_from_sublevel_50(player_name):
+    print('-----------------------------------------------------------------------------------')
+    print("You and Orion Pax are kicked down to Sublevel 50 by one of Sentinel Prime's guards.")
+    print("As you tumble down, you land in the depths of Cybertron, in a dark and eerie sector filled with old mining equipment.")
+    
+    print("Here, you meet B-127, a friendly miner bot in charge of all the scrap metal. B-127 explains that he's been working here alone, building sculptures out of old parts.")
+    print("As you interact with B-127, you accidentally knock into one of his friends and their head falls off, popping out a disc.")
+    
+    print("B-127 plays the disc for you. It's a **distress message** from the legendary **Alpha Trion**. The message reveals that the Primes are on a mission and they were told to meet in a cave, "
+          "with coordinates pointing to the surface of Cybertron.")
+    
+    print("This discovery fills you with determination. You and Orion Pax decide to set course for the surface to uncover the truth behind what happened to the Primes.")
+    print("On your way out of Sublevel 50, you encounter another robot named **Elita**, a warrior who shares your interest in finding out the truth.")
+    
+    print("Now, the three of you venture out of your comfort zones to unravel the mysteries of Cybertron and the disappearance of the Primes.")
+    print("You hop aboard a cargo train carrying loads of **Energon** on a path to the surface of Cybertron.")
+
+    print("But as the train speeds through the tunnels, your group is suddenly attacked by **random invaders**! They think you're looting the energon!")
+
+    battle_choice()
+
+def battle_choice():
+        print(' ')
         print("\nYou are now being attacked by random invaders while on the cargo train!")
         print("Choose an item from your inventory to use in the battle:")
     
         # Display available inventory items
-        for i, item in enumerate(inventory, 1):
+        for i, item in enumerate(Inventory, 1):
             print(f"{i}. {item}")
     
         # Ask player to choose an item
@@ -254,26 +276,8 @@ if __name__== '__main__': #so the program will run, dont delete
         else:
             print("\nInvalid choice! You hesitate and are caught off guard by the invaders!")
 
-    
-    def escape_from_sublevel_50():
-        print("You and Orion Pax are kicked down to Sublevel 50 by one of Sentinel Prime's guards.")
-        print("As you tumble down, you land in the depths of Cybertron, in a dark and eerie sector filled with old mining equipment.")
-    
-        print("Here, you meet B-127, a friendly miner bot in charge of all the scrap metal. B-127 explains that he's been working here alone, building sculptures out of old parts.")
-        print("As you interact with B-127, you accidentally knock into one of his friends and their head falls off, popping out a disc.")
-    
-        print("B-127 plays the disc for you. It's a **distress message** from the legendary **Alpha Trion**. The message reveals that the Primes are on a mission and they were told to meet in a cave, "
-          "with coordinates pointing to the surface of Cybertron.")
-    
-        print("This discovery fills you with determination. You and Orion Pax decide to set course for the surface to uncover the truth behind what happened to the Primes.")
-        print("On your way out of Sublevel 50, you encounter another robot named **Elita**, a warrior who shares your interest in finding out the truth.")
-    
-        print("Now, the three of you venture out of your comfort zones to unravel the mysteries of Cybertron and the disappearance of the Primes.")
-        print("You hop aboard a cargo train carrying loads of **Energon** on a path to the surface of Cybertron.")
-
-        print("But as the train speeds through the tunnels, your group is suddenly attacked by **random invaders**! They think you're looting the energon!")
-
-        battle_choice()
+if __name__== '__main__': #so the program will run, dont delete
+    mainmenu()
 
 #Phase 6: Event Path 3 Captured by the Cybertronian High Guard
 
