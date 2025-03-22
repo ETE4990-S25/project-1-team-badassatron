@@ -1,6 +1,5 @@
 import random
 
-
 class Player:
     def __init__(self, name, character_class):
         self.name = name
@@ -203,9 +202,6 @@ def ending_megatron():
     print('Through your actions, you have shown that the Autobots are not to be trusted with the fate of Cybertron.')
     print('You attempt to take the Matrix of Leadership, but it rejects you. You are bitter towards Orion Pax, for who you believe is too weak to lead Cybertron.')
 
-if __name__== '__main__': #so the program will run, dont delete
-    mainmenu()
-
 #Phase 4: Event Path 1 Sneaking into the Iacon 5000
 def sneak_into_iacon_5000():
     print("Welcome to the Iacon 5000, the best race in all of Cybertron!")
@@ -225,7 +221,9 @@ def sneak_into_iacon_5000():
     else:
         print("Invalid input. Please type 'yes' or 'no'.")
         
-
+if __name__== '__main__': #so the program will run, dont delete
+    mainmenu()
+    
 #Phase 5: Event Path 2 Escape from Sublevel 50 with B-127
 
     def battle_choice():
