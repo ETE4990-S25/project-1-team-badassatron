@@ -3,5 +3,6 @@ Hi! So heres the sitch with the files
 - testingbadassatron.ipynb is the TESTING FILE
 
 NOTE:
-- still working out kinks on badassatronmain.py so itll probably only go up to character selection then error out
+- CODE WORKS UP TO FIRST FIGHT, STILL FIXING INVENTORY ACCESS
+- WILL MOVE CLASSES INTO SEPERATE FOLDERS TO BE IMPORTED SO ORGANIZATION IS EASIER
 - will update these notes everytime we work on it
