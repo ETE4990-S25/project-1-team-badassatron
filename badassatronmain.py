@@ -75,7 +75,24 @@ def combat (player, enemy):
 
     print(f"\n Battle Over! {"You won!" if player.alive() else "You Lost!"}")
 
-def character_selection(player_name):
+def character_selection():
+    classes = {
+        "Medic": Medic,
+        "Warrior" : Warrior,
+        "Tank" : Tank,
+        "Aerial" : Aerial
+    }
+
+    print("Please choose your path: ")
+    for class_name in classes:
+        print(f"-{class_name.capitalize()}")
+
+    while True:
+        choice = input("Enter class: ").strip().lower()
+        if choice in classes:
+            return classes[choice](player_name)
+        else:
+            print("Invalid choice")
      
 
 #Phase 1: Start    
@@ -86,12 +103,12 @@ def mainmenu():
     print('The instructions are simple, choose as you see fit, and see where destiny sends you.')
     print('During interactions, you will take turns attacking until one is victorious.')
     print('')
-    name = input('First, please tell us who you are: ')
+    player_name = input('First, please tell us who you are: ')
     print('')
-    Prelude(name)
+    Prelude()
 
 #Phase 2: Prelude
-def Prelude(player_name):
+def Prelude():
     print('-----------------------------------------------------------------------------------')
     print(f'Young {player_name}, Minerbot69420, your producton of energon has been lacking and Sentinel Prime is counting on you.')
     print(' ')
@@ -114,27 +131,6 @@ def Prelude(player_name):
         Prelude(player_name)
 
 #Phase 3: Establish Inventory (dictionary with items and traits)
-def character_selection(player_name): 
-    print('-----------------------------------------------------------------------------------')
-    print('Choose your character class: ')
-    print("1. Medic")
-    print("2. Warrior")
-    print("3. Tank ")
-    print("4. Aerial")
-    choice = input("Please input the number corresponding with your choice: ")
-
-    if choice == "1":
-        character_class = "Medic"
-    elif choice == "2":
-        character_class = "Warrior"
-    elif choice == "3":
-        character_class = "Tank"
-    elif choice == "4":
-        character_class = "Aerial"
-    else:
-        print("Input invalid, setting default class to Warrior")
-        character_class = "Warrior"
-
     player = Player(player_name, character_class)
     print(player.show_profile())
     sneak_into_iacon_5000(player_name)
@@ -258,7 +254,7 @@ def sneak_into_iacon_5000(player_name):
         print("Your loss is a disappointment and the transformers laugh at you and Orion Pax for trying to race")
     else:
         print("Invalid input. Please type 'yes' or 'no'.")
-            while True:
+        while True:
                 choice = input("Do you want to join Orion Pax and equip a jet pack" "yes/no): ").lower()
                 if choice in ["yes", "no"]:
                     break
@@ -273,7 +269,7 @@ def sneak_into_iacon_5000(player_name):
     elif choice == "no":
         print("\nYou decided not to join Orion Pax and watch from the sidelines.")
         print("You still enter the race but without the jet pack, you fall terribly behind!")
-        print("Your loss is a disappointment and the transformers laugh at you and Orion
+        print("Your loss is a disappointment and the transformers laugh at you and Orion")
     escape_from_sublevel_50(player_name)
 
 #Phase 5: Event Path 2 Escape from Sublevel 50 with B-127
@@ -311,14 +307,14 @@ def battle_choice():
         # Ask player to choose an item
         try:
             choice = int(input("\nEnter the number of the item you wish to use: "))
-             if 1 <= choice <= len(player.inventory.items):
+            if 1 <= choice <= len(player.inventory.items):
                 selected_item = player.inventory.items[choice - 1]
                 print(f"\nYou used {selected_item.name}!")
                 selected_item.use()
             else:
                 print("\nInvalid choice!")
-            except ValueError:
-                print("\nPlease enter a number.")
+        except ValueError:
+            print("\nPlease enter a number.")
 
 if __name__== '__main__': #so the program will run, dont delete
     mainmenu()
@@ -487,23 +483,23 @@ def battle_sentinel():
         print(f"Sentinel Prime attacks you for {damage} damage!")
     round_counter = 1
     while player_health > 0 and sentinel_health > 0:
-    print(f"Round {round_counter}")
+        print(f"Round {round_counter}")
     round_counter += 1
 
         # Let the player choose an item from their inventory for the final battle
-        print("\nChoose an item from your inventory to use in this final round:")
-        for i, item in enumerate(inventory, 1):
+    print("\nChoose an item from your inventory to use in this final round:")
+    for i, item in enumerate(inventory, 1):
             print(f"{i}. {item}")
-        choice = int(input("\nEnter the number of the item you wish to use: "))
+    choice = int(input("\nEnter the number of the item you wish to use: "))
         
-        if choice == 1:
+    if choice == 1:
             print("\nYou equip the Laser Sword and charge at Sentinel Prime!")
             damage = random.randint(20, 40)
             sentinel_health -= damage
             print(f"You hit Sentinel Prime for {damage} damage!")
-        elif choice == 2:
+    elif choice == 2:
             print("\nYou equip the Energy Shield to defend against Sentinel Prime's attack!")
-            damage = random.randint(15
+            damage = random.randint(15)
     
     # Check the health after the battle
     if sentinel_health <= 0 and player_health > 0:
@@ -551,11 +547,11 @@ def main_event():
         
 # Call the main event function to start the game
 main_event()
-    def main_event():
+def main_event():
     global player_health, arachnid_health, sentinel_health
     arachnid_battle_result = battle_arachnid()
     if player_health <= 0:
-    print("\nYou were defeated by Arachnid, and now the fate of Cybertron is uncertain.")
+        print("\nYou were defeated by Arachnid, and now the fate of Cybertron is uncertain.")
     return
 
 #Game End with Stats -> Reset and Restart
