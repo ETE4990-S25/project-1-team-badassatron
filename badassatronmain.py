@@ -75,7 +75,7 @@ def combat (player, enemy):
 
     print(f"\n Battle Over! {"You won!" if player.alive() else "You Lost!"}")
 
-def character_selection():
+def character_selection(Player):
     classes = {
         "Medic": Medic,
         "Warrior" : Warrior,
@@ -90,7 +90,7 @@ def character_selection():
     while True:
         choice = input("Enter class: ").strip().lower()
         if choice in classes:
-            return classes[choice](player_name)
+            return classes[choice](Player)
         else:
             print("Invalid choice")
      
@@ -103,14 +103,14 @@ def mainmenu():
     print('The instructions are simple, choose as you see fit, and see where destiny sends you.')
     print('During interactions, you will take turns attacking until one is victorious.')
     print('')
-    player_name = input('First, please tell us who you are: ')
+    Player.__name__ = input('First, please tell us who you are: ')
     print('')
     Prelude()
 
 #Phase 2: Prelude
-def Prelude():
+def Prelude(Player):
     print('-----------------------------------------------------------------------------------')
-    print(f'Young {player_name}, Minerbot69420, your producton of energon has been lacking and Sentinel Prime is counting on you.')
+    print(f'Young {Player.__name__}, Minerbot69420, your producton of energon has been lacking and Sentinel Prime is counting on you.')
     print(' ')
     print('As a miner you')
     print("   - work 14 hour work days")
@@ -118,17 +118,17 @@ def Prelude():
     print(' ')
     print("Sentinel Prime just announced a higher quota for this week, like a cog in a machine am I right? ")
     print('You are approached by another bot about a rumor. Fellow miner, Orion Pax, has decided to revolt!')
-    print(f'Please {player_name}, choose the path you wish to take...')
+    print(f'Please {Player.__name__}, choose the path you wish to take...')
     print('   1. Revolt with Orion Pax and choose your destiny')
     print('   2. Continue to work in the mines.')
     option = input()
     if option == '1':
-        character_selection(player_name)
+        character_selection(Player)
     elif option == '2':
-        endgame_boring(player_name)
+        endgame_boring(Player)
     else:
         print("Invalid input. Please choose option 1 or 2.")
-        Prelude(player_name)
+        Prelude(Player)
 
 #Phase 3: Establish Inventory (dictionary with items and traits)
     player = Player(player_name, character_class)
