@@ -74,3 +74,7 @@ def combat (player, enemy):
 
 print(f"\n Battle Over! {"You won!" if player.alive() else "You Lost!"}")
    
+__________________________________
+
+def choose_character():
+    print

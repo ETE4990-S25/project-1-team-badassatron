@@ -1,14 +1,15 @@
 import random
-class player:
+class Player:
     def __init__(self, name, health = 100):
         self.name = name
         self.health = health
         self.attack_power = 10
+        self.character_class = self.__class__.__name__
 
     def alive(self):
         return self.health > 0
     
-    def attach(self,target):
+    def attack(self,target):
         print(f"{self.name} attacks {target.name} for {self.attack_power} damage.")
         target.take_damage(self.attack_power)
     
@@ -19,21 +20,21 @@ class player:
     def show_profile(self):
         return f"Name: {self.name}, Class: {self.character_class}, HP: {self.health}, Attack: {self.attack}, Heal: {self.heal}, Shield: {self.shield}, Agility: {self.agility}"
     
-class Medic(player):
+class Medic(Player):
     def __init__(self, name):
         super().__init__(name)
-        self.heal = 20
+        self.heal_amount = 10
 
     def heal(self):
         self.health += self.heal_amount
         print(f"{self.name} heals for {self.heal_amount}. Health is now {self.health}.")
 
-class Warrior(player):
+class Warrior(Player):
     def __init__(self,name):
         super().__init__(name)
         self.attack_power = 20
 
-class Tank(player):
+class Tank(Player):
     def __init__(self,name):
         super().__init__(name, health = 150)
         self.attack_power = 12
@@ -44,7 +45,7 @@ class Tank(player):
         super().take_damage(reduced)
         print(f"{self.name} armor reduces damge by {self.armor}.")   
 
-class Aerial(player):
+class Aerial(Player):
     def __init__(self,name):
         super().__init__(name)
         self.attack_power = 15
@@ -72,7 +73,10 @@ def combat (player, enemy):
         player.take_damage(damage)
         print(f"{enemy.name} counterattacks {player.name} for {damage} damage!")
 
-print(f"\n Battle Over! {"You won!" if player.alive() else "You Lost!"}")
+    print(f"\n Battle Over! {"You won!" if player.alive() else "You Lost!"}")
+
+def character_selection(player_name):
+     
 
 #Phase 1: Start    
 def mainmenu():
