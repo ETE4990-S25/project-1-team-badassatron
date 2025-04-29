@@ -113,24 +113,34 @@ def character_selection(player_name):
     sneak_into_iacon_5000(player_name)
 
 class Item:
-    def __init__(self, name, durability, blank):
+    def __init__(self, name, durability, traits=None):
         self.name = name 
         self.durability = durability
-        self.blank = blank #create item traits
+        self.traits = traits #create item traits
 
     def use(self):
         if self.durability > 0:
             self.durability -= 1
-            print (f'Used {self.name}, item health now {self.durability}')
+            print (f'Used {self.name}, item durability now {self.durability}')
         else:
             print(f'{self.name} is broken')
+
 class Weapon(Item):
-    def __init__(self,name, durability, blank, damage):
-        super().__init__(name, durability, blank) #Will add functions after we figure out more story
+    def __init__(self,name, durability, traits=None, damage=0):
+        super().__init__(name, durability, traits) #Will add functions after we figure out more story
         self.damage = damage
+
+        def use(self):
+            if self.durability > 0:
+                self.durability -= 1
+                print (f'Attacked with {self.name}, damage: {self.damage}, item durability now {self.durability}')
+            else:
+                print(f'{self.name} is broken')
+                return self.damage
+            
 class Wearable(Item):
-    def __init__(self,name, durability, blank):
-        super().__init__(name, durability, blank) #Will add functions after we figure out more story
+    def __init__(self,name, durability, traits=None):
+        super().__init__(name, durability, traits) #Will add functions after we figure out more story
 
 class Inventory:
     def __init__(self):
@@ -150,25 +160,24 @@ class Inventory:
     def use_item(self,item):
         if item in self.items:
             item.use()
-            item.durability  -= 10
         else:
             print(f'{item.name} is not in your pack.')
 
 player_inventory = Inventory()
 
 #item list
-Allspark= Item("Allspark", 1000000, None)
-Matrix_of_Leadership= Item("Matrix of Leadership",1000000, None)
-Axe= Weapon("Axe", 20, 100, None)
-Sword= Weapon("Sword", 30, 100, None)
-Bazooka= Weapon("Bazooka", 40, 100, None)
-Handheld_Turret= Weapon("Handheld Turret", 40, 100, None)
-Zapper= Weapon("Zapper", 20, 100, None)
-Shield= Item("Shield", 200, None)
-Energon= Item("Energon", 100000, None)
-Medpack= Item("Medpack", 100, None)
-Jetpack= Wearable("Jetpack", 200, None )
-Add_Changer= Wearable("Transformer", 1000000, None)
+Allspark = Item("Allspark", 1_000_000)
+Matrix_of_Leadership = Item("Matrix of Leadership", 1_000_000)
+Axe = Weapon("Axe", 20, damage=15)
+Sword = Weapon("Sword", 30, damage=20)
+Bazooka = Weapon("Bazooka", 40, damage=50)
+Handheld_Turret = Weapon("Handheld Turret", 40, damage=35)
+Zapper = Weapon("Zapper", 20, damage=25)
+Shield = Item("Shield", 200)
+Energon = Item("Energon", 100_000)
+Medpack = Item("Medpack", 100)
+Jetpack = Wearable("Jetpack", 200)
+Add_Changer = Wearable("Transformer", 1_000_000)
 
 def endgame_boring(player_name):
     print('-----------------------------------------------------------------------------------')
@@ -210,7 +219,7 @@ def sneak_into_iacon_5000(player_name):
     print("You have an important decision to make.")
     print("Orion Pax has a plan to sneak into the Iacon 5000 and make a name for the minerbots.")
 
-    choice = input("Do you want to join Orion Pax and equip a jet pack to race? (yes/no): ").lower()
+    choice = input("Join Orion Pax and equip a jet pack? (Yes/No): ").strip().lower()
 
     if choice == "yes":
         print("You decided to join Orion Pax and equip a jet pack for the race.")
@@ -222,6 +231,22 @@ def sneak_into_iacon_5000(player_name):
         print("Your loss is a disappointment and the transformers laugh at you and Orion Pax for trying to race")
     else:
         print("Invalid input. Please type 'yes' or 'no'.")
+            while True:
+                choice = input("Do you want to join Orion Pax and equip a jet pack" "yes/no): ").lower()
+                if choice in ["yes", "no"]:
+                    break
+                else:
+                    print("Invalid input. Please type 'yes' or 'no'.")
+                    continue
+    if choice == "yes":
+        print("You decided to join Orion Pax and equip a jet pack")
+        player.inventory.add_item_to_pack(Jetpack)
+        print("With your jet pack, you fly past the competition, winning the race!")
+        print("The crowd goes wild that two minerbots have won the Iacon 5000 without the ability to transform.")
+    elif choice == "no":
+        print("\nYou decided not to join Orion Pax and watch from the sidelines.")
+        print("You still enter the race but without the jet pack, you fall terribly behind!")
+        print("Your loss is a disappointment and the transformers laugh at you and Orion
     escape_from_sublevel_50(player_name)
 
 #Phase 5: Event Path 2 Escape from Sublevel 50 with B-127
@@ -253,35 +278,27 @@ def battle_choice():
         print("Choose an item from your inventory to use in the battle:")
     
         # Display available inventory items
-        for i, item in enumerate(Inventory, 1):
-            print(f"{i}. {item}")
+        for i, item in enumerate(player.inventory.items, 1):
+            print(f"{i}. {item.name} Durability: {item.durability}")
     
         # Ask player to choose an item
-        choice = int(input("\nEnter the number of the item you wish to use: "))
-        
-        if choice == 1:
-            print("\nYou equipped __Axe__! You swing the axe at the invaders as they approach!")
-            result = ("YAY AXE")#put something here
-            if result == "win":
-                print("win")
-        elif choice == 2:
-            print("lose")
-        elif choice == 3:
-            print("\nYou equipped ...")
-            result = ("i equipped somethin")#put something here
-            if result == "win":
-                print("")
+        try:
+            choice = int(input("\nEnter the number of the item you wish to use: "))
+             if 1 <= choice <= len(player.inventory.items):
+                selected_item = player.inventory.items[choice - 1]
+                print(f"\nYou used {selected_item.name}!")
+                selected_item.use()
             else:
-                print("")
-        else:
-            print("\nInvalid choice! You hesitate and are caught off guard by the invaders!")
+                print("\nInvalid choice!")
+            except ValueError:
+                print("\nPlease enter a number.")
 
 if __name__== '__main__': #so the program will run, dont delete
     mainmenu()
 
 #Phase 6: Event Path 3 Captured by the Cybertronian High Guard
 
-def battle_choice2():
+def battle_choice2(player_name):
     print("\nYou are captured by the Cybertronian High Guard. You must decide what to do next.")
     print("Do you fight Starscream to create a batallion or give your respect to the High Guard?")
     
@@ -355,7 +372,7 @@ def battle_arachnid():
         
         # Let the player choose an item from their inventory
         print("\nChoose an item from your inventory to use in this round:")
-        for i, item in enumerate(inventory, 1):
+        for i, item in enumerate(player_inventory.items, 1):
             print(f"{i}. {item}")
         choice = int(input("\nEnter the number of the item you wish to use: "))
         
@@ -397,13 +414,6 @@ def battle_arachnid():
         if player_health <= 0:
             print("\nYou have been defeated by Arachnid.")
             return "lose"
-    
-    if player_health > 0:
-        print("\nYou defeated Arachnid in 3 rounds!")
-        return "win"
-    else:
-        print("\nYou failed to defeat Arachnid.")
-        return "lose"
 
 # Define a function for the final battle with Sentinel Prime (1 round)
 def battle_sentinel():
@@ -448,6 +458,25 @@ def battle_sentinel():
         damage = random.randint(30, 50)
         player_health -= damage
         print(f"Sentinel Prime attacks you for {damage} damage!")
+    round_counter = 1
+    while player_health > 0 and sentinel_health > 0:
+    print(f"Round {round_counter}")
+    round_counter += 1
+
+        # Let the player choose an item from their inventory for the final battle
+        print("\nChoose an item from your inventory to use in this final round:")
+        for i, item in enumerate(inventory, 1):
+            print(f"{i}. {item}")
+        choice = int(input("\nEnter the number of the item you wish to use: "))
+        
+        if choice == 1:
+            print("\nYou equip the Laser Sword and charge at Sentinel Prime!")
+            damage = random.randint(20, 40)
+            sentinel_health -= damage
+            print(f"You hit Sentinel Prime for {damage} damage!")
+        elif choice == 2:
+            print("\nYou equip the Energy Shield to defend against Sentinel Prime's attack!")
+            damage = random.randint(15
     
     # Check the health after the battle
     if sentinel_health <= 0 and player_health > 0:
@@ -495,9 +524,22 @@ def main_event():
         
 # Call the main event function to start the game
 main_event()
+    def main_event():
+    global player_health, arachnid_health, sentinel_health
+    arachnid_battle_result = battle_arachnid()
+    if player_health <= 0:
+    print("\nYou were defeated by Arachnid, and now the fate of Cybertron is uncertain.")
+    return
 
 #Game End with Stats -> Reset and Restart
 def game_end():
     print("\nThank you for playing Savior of Cybertron!")
-    print("put ending here") #put ending type here
+    choice = input("Would you like to play again? (yes/no): ").lower()
+    if choice == "yes":
+        mainmenu()
+    elif choice == "no":
+        print("Stay safe warrior!")
+    else:
+        print("Invalid input. Please type 'yes' or 'no'.")
+        game_end()
 
