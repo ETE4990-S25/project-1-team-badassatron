@@ -1,4 +1,5 @@
-class Player:
+import random
+class player:
     def __init__(self, name, health = 100):
         self.name = name
         self.health = health
@@ -18,7 +19,7 @@ class Player:
     def show_profile(self):
         return f"Name: {self.name}, Class: {self.character_class}, HP: {self.health}, Attack: {self.attack}, Heal: {self.heal}, Shield: {self.shield}, Agility: {self.agility}"
     
-class Medic(Player):
+class Medic(player):
     def __init__(self, name):
         super().__init__(name)
         self.heal = 20
@@ -27,12 +28,12 @@ class Medic(Player):
         self.health += self.heal_amount
         print(f"{self.name} heals for {self.heal_amount}. Health is now {self.health}.")
 
-class Warrior(Player):
+class Warrior(player):
     def __init__(self,name):
         super().__init__(name)
         self.attack_power = 20
 
-class Tank(Player):
+class Tank(player):
     def __init__(self,name):
         super().__init__(name, health = 150)
         self.attack_power = 12
@@ -43,7 +44,7 @@ class Tank(Player):
         super().take_damage(reduced)
         print(f"{self.name} armor reduces damge by {self.armor}.")   
 
-class Aerial(Player):
+class Aerial(player):
     def __init__(self,name):
         super().__init__(name)
         self.attack_power = 15
@@ -53,24 +54,23 @@ class Aerial(Player):
 def combat (player, enemy):
     print(f"\n {player.name} faces {enemy.name} in combat!")
 
-    while player.health > 0 and enemy.health > 0:
-        action = input ("What will you do? (attack, heal, shield)")
+    while player.alive() and enemy.alive():
+        print("\n"+ player.show_profile())
+        print(enemy.show_profile())
+
+        action = input ("What will you do? (attack, heal)")
+
         if action == "attack":
-            enemy.health -= player.attack
-            print(f"{player.name} attacks {enemy.name} for {player.attack} damage")
+            player.attack(enemy)
         elif action == "heal":
-            player.health += player.heal
-            print(f"{player.name} heals for {player.heal} health")
-        elif action == "shield":
-            player.health += player.shield
-            print(f"{player.name} shields for {player.shield} health")
+            player.heal()
         else:
             print("Invalid action")
 # Enemy attacks
-    if enemy.health > 0:
+    if enemy.alive():
         damage = random.randint(5, 10)
-        player.health -= damage
-        print(f"{enemy.name} attacks {player.name} for {damage} damage!")
-        print(f"{player.name} has {player.health} health left")
-        print(f"{enemy.name} has {enemy.health}")
+        player.take_damage(damage)
+        print(f"{enemy.name} counterattacks {player.name} for {damage} damage!")
+
+print(f"\n Battle Over! {"You won!" if player.alive() else "You Lost!"}")
    

@@ -1,55 +1,78 @@
 import random
-
-class Player:
-    def __init__(self, name, character_class):
+class player:
+    def __init__(self, name, health = 100):
         self.name = name
-        self.character_class = character_class
-        self.health = 100 #default health
-        self.attack = 0 #default attack            
-        self.heal = 0 #default heal
-        self.shield = 0 #default shield
-        self.agility = 0 #default agility
-        self.inventory = [] #Inventory starts empty
-        self.set_attributes(character_class)
+        self.health = health
+        self.attack_power = 10
 
-    def set_attributes(self, character_class):
-        if character_class == "Medic":
-            self.heal = 20
-        elif character_class == "Warrior":
-            self.attack = 20
-        elif character_class == "Tank":
-            self.shield = 20
-        elif character_class == "Aerial":
-            self.agility = 20
-        else:
-            print("Invalid character class")
+    def alive(self):
+        return self.health > 0
+    
+    def attach(self,target):
+        print(f"{self.name} attacks {target.name} for {self.attack_power} damage.")
+        target.take_damage(self.attack_power)
+    
+    def take_damage(self, amount):
+        self.health -= amount
+        print(f"{self.name} takes {amount} damage. Health is now {self.health}.")
 
     def show_profile(self):
         return f"Name: {self.name}, Class: {self.character_class}, HP: {self.health}, Attack: {self.attack}, Heal: {self.heal}, Shield: {self.shield}, Agility: {self.agility}"
     
-def combat (player, enemy):
-    print(f"{player.name} faces {enemy.name} in combat!")
+class Medic(player):
+    def __init__(self, name):
+        super().__init__(name)
+        self.heal = 20
 
-    while player.health > 0 and enemy.health > 0:
-        action = input ("What will you do? (attack, heal, shield)")
+    def heal(self):
+        self.health += self.heal_amount
+        print(f"{self.name} heals for {self.heal_amount}. Health is now {self.health}.")
+
+class Warrior(player):
+    def __init__(self,name):
+        super().__init__(name)
+        self.attack_power = 20
+
+class Tank(player):
+    def __init__(self,name):
+        super().__init__(name, health = 150)
+        self.attack_power = 12
+        self.armor = 5
+
+    def take_damage(self, amount):
+        reduced = max(amount-self.armor, 0) 
+        super().take_damage(reduced)
+        print(f"{self.name} armor reduces damge by {self.armor}.")   
+
+class Aerial(player):
+    def __init__(self,name):
+        super().__init__(name)
+        self.attack_power = 15
+        self.agility = 20
+
+
+def combat (player, enemy):
+    print(f"\n {player.name} faces {enemy.name} in combat!")
+
+    while player.alive() and enemy.alive():
+        print("\n"+ player.show_profile())
+        print(enemy.show_profile())
+
+        action = input ("What will you do? (attack, heal)")
+
         if action == "attack":
-            enemy.health -= player.attack
-            print(f"{player.name} attacks {enemy.name} for {player.attack} damage")
+            player.attack(enemy)
         elif action == "heal":
-            player.health += player.heal
-            print(f"{player.name} heals for {player.heal} health")
-        elif action == "shield":
-            player.health += player.shield
-            print(f"{player.name} shields for {player.shield} health")
+            player.heal()
         else:
             print("Invalid action")
 # Enemy attacks
-    if enemy.health > 0:
+    if enemy.alive():
         damage = random.randint(5, 10)
-        player.health -= damage
-        print(f"{enemy.name} attacks {player.name} for {damage} damage!")
-        print(f"{player.name} has {player.health} health left")
-        print(f"{enemy.name} has {enemy.health}")
+        player.take_damage(damage)
+        print(f"{enemy.name} counterattacks {player.name} for {damage} damage!")
+
+print(f"\n Battle Over! {"You won!" if player.alive() else "You Lost!"}")
 
 #Phase 1: Start    
 def mainmenu():
