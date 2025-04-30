@@ -73,9 +73,12 @@ def combat (player, enemy):
         player.take_damage(damage)
         print(f"{enemy.name} counterattacks {player.name} for {damage} damage!")
 
+    if enemy.health <= 10:
+        print(f"{enemy.name} is critically wounded.")
+
     print(f"\n Battle Over! {"You won!" if player.alive() else "You Lost!"}")
 
-def character_selection(Player):
+def character_selection():
     classes = {
         "Medic": Medic,
         "Warrior" : Warrior,
@@ -85,12 +88,13 @@ def character_selection(Player):
 
     print("Please choose your path: ")
     for class_name in classes:
-        print(f"-{class_name.capitalize()}")
+        print(f"- {class_name}")
 
     while True:
-        choice = input("Enter class: ").strip().lower()
+        choice = input("Enter class: ").strip()
         if choice in classes:
-            return classes[choice](Player)
+            print(f"You have chosen {Player.character_class}")
+            return Player
         else:
             print("Invalid choice")
      
@@ -105,7 +109,7 @@ def mainmenu():
     print('')
     Player.__name__ = input('First, please tell us who you are: ')
     print('')
-    Prelude()
+    Prelude(Player)
 
 #Phase 2: Prelude
 def Prelude(Player):
@@ -123,12 +127,12 @@ def Prelude(Player):
     print('   2. Continue to work in the mines.')
     option = input()
     if option == '1':
-        character_selection(Player)
+        character_selection()
     elif option == '2':
-        endgame_boring(Player)
+        endgame_boring()
     else:
         print("Invalid input. Please choose option 1 or 2.")
-        Prelude(Player)
+        Prelude()
 
 #Phase 3: Establish Inventory (dictionary with items and traits)
     player = Player(player_name, character_class)
