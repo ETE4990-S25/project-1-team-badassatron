@@ -91,7 +91,7 @@ class Enemy:
         self.health = health
         self.attack = attack
 
-    def alive(self, health):
+    def alive(self):
         return self.health > 0
     
     def take_damage(self, damage):
