@@ -6,18 +6,18 @@ class Player:
         self.attack_power = attack_power
         self.character_class = self.__class__.__name__
         self.inventory = [
-            Item("Allspark", 1_000_000),
-            Item("Matrix of Leadership", 1_000_000),
+            Item("Allspark", 1_000_000, 1_000_000),
+            Item("Matrix of Leadership", 1_000_000, 1_000_000),
             Weapon("Axe", 20, damage=15),
             Weapon("Sword", 30, damage=20),
             Weapon("Bazooka", 40, damage=50),
             Weapon("Handheld Turret", 40, damage=35),
             Weapon("Zapper", 20, damage=25),
-            Item("Shield", 200),
-            Item("Energon", 100_000),
-            Item("Medpack", 100),
-            Wearable("Jetpack", 200),
-            Wearable("Transformer", 1_000_000)
+            Item("Shield", 200, 10),
+            Item("Energon", 100_000, 10),
+            Item("Medpack", 100, 10),
+            Wearable("Jetpack", 200, 100),
+            Wearable("Transformer", 1_000_000,100)
         ]
 
     def __str__(self):
@@ -176,7 +176,7 @@ def Prelude(player):
 #Phase 3: Establish Inventory (dictionary with items and traits)
 
 class Item:
-    def __init__(self, name, value):
+    def __init__(self, name, value, durability):
         self.name = name 
         self.value = value
 
