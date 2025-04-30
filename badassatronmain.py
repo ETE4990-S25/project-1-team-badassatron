@@ -8,11 +8,11 @@ class Player:
         self.inventory = [
             Item("Allspark", 1_000_000, 1_000_000),
             Item("Matrix of Leadership", 1_000_000, 1_000_000),
-            Weapon("Axe", 20, damage=15),
-            Weapon("Sword", 30, damage=20),
-            Weapon("Bazooka", 40, damage=50),
-            Weapon("Handheld Turret", 40, damage=35),
-            Weapon("Zapper", 20, damage=25),
+            Weapon("Axe", 20, durability= 50, damage=15),
+            Weapon("Sword", 30, durability= 50, damage=20),
+            Weapon("Bazooka", 40, durability= 50, damage=50),
+            Weapon("Handheld Turret", 40, durability= 50, damage=35),
+            Weapon("Zapper", 20, durability= 50, damage=25),
             Item("Shield", 200, 10),
             Item("Energon", 100_000, 10),
             Item("Medpack", 100, 10),
@@ -91,7 +91,7 @@ class Enemy:
         self.health = health
         self.attack = attack
 
-    def alive(self):
+    def alive(self, health):
         return self.health > 0
     
     def take_damage(self, damage):
@@ -100,8 +100,8 @@ class Enemy:
             self.health = 0
 
     def attack(self,player):
-        print(f"{self.name} attacks {player.name} for {self.attack_power} damage.")
-        player.take_damage(self.attack_power)
+        print(f"{self.name} attacks {player.name} for {self.attack} damage.")
+        player.take_damage(self.attack)
     
 def combat (player, enemy):
     print(f"\n {player.name} faces {enemy.name} in combat!")
@@ -195,55 +195,30 @@ class Item:
     def __init__(self, name, value, durability):
         self.name = name 
         self.value = value
+        self.durability = durability
 
     def __str__(self):
         return f"{self.name} (Value: {self.value})"
 
 class Weapon(Item):
-    def __init__(self, name, durability, damage):
-        super().__init__(name, value=0) #Will add functions after we figure out more story
-        self.durability = durability
+    def __init__(self, name, value, durability, damage):
+        super().__init__(name, value, durability)
         self.damage = damage
 
-        def __str__(self):
-            return f"{self.name} (Durability: {self.durability}, Damage: {self.damage})"
+    def __str__(self):
+        return f"{self.name} (Durability: {self.durability}, Damage: {self.damage})"
             
 class Wearable(Item):
     def __init__(self, name, value, durability):
-        super().__init__(name, value) #Will add functions after we figure out more story
-        self.durability = durability
+        super().__init__(name, value, durability) #Will add functions after we figure out more story
 
     def __str__(self):
         return f"{self.name} (Value: {self.value}, Durability: {self.durability})"
-
-class Inventory:
-    def __init__(self):
-        self.items = [] #when player chooses character, items automatically added to inventory
-
-    def add(self, item):
-        self.items.append(item)
-        print(f'{item.name} has been added to your invertory.')
-
-    def remove(self,item):
-        if item in self.items:
-            self.items.remove(item)
-            print(f'{item.name} has been removed.')
-        else:
-            print(f'{item.name} not found in inventory.')
-
-    def use(self,item_name):
-        for item in self.items:
-            if item.name == item_name.lower():
-                item.use()
-                return
-        print(f'{item_name} not found in inventory.')
-
-    def list_items(self):
-        if not self.items:
-            print("Your inventory is empty.")
-            return
-        for i, item in enumerate(self.items, 1):
-            print(f"{i}. {item.name} (Durability: {item.durability})")
+    
+tshirt = Wearable("Tshirt", 400, 1000)
+print(tshirt)
+bigstick = Weapon("Big Stick", 100, 2000, 4)
+print(bigstick)
 
 def ending_boring(name):
     print('-----------------------------------------------------------------------------------')
@@ -344,31 +319,35 @@ def battle_1(player):
     print("\nYou are now being attacked by random invaders while on the cargo train!")
     print("Choose an item from your inventory to use in the battle:")
 
-    enemy = ("Invaders", 50, 10)
-    while player.alive() and enemy.alive():
-        print(f"\n {player.name}'s turn! ")
-        action = input(f"Choose your action: 1) Attack 2) Use Item 3) Do nothing ")
+    invader = Enemy("Invaders", 50, 10)
+    player = Player("{player_name}")
+
+    print(invader)
+    
+    while player.alive() and invader.alive():
+        print(f"player is of type: {type(player)}")
+        print(f"invader is of type: {type(invader)}")
+
+        print(f"\n{player.name}'s turn!")
+        action = input("Choose your action: 1) Attack 2) Use Item 3) Do nothing ")
 
         if action == "1":
-            player.attack(enemy)
+            player.attack(invader)
         elif action == "2":
             player.choose_item()
-        elif action =="3":
+        elif action == "3":
             print(f"\n{player.name} does nothing...")
 
-        if enemy.alive():
-            print(f"\n {enemy.name}'s turn!")
-            enemy.attack(player)
+        if invader.alive():
+            print(f"\n{invader.name}'s turn!")
+            invader.attack(player)
 
         if not player.alive():
-            print(f"\n {player.name} has been defeated...")
+            print(f"\n{player.name} has been defeated...")
             game_end()
 
-    print (f"\n {player.name} HP: {player.health} | {enemy.name} HP: {enemy.health}")
-
-battle_1(player)
-        
-
+    print(f"\n{player.name} HP: {player.health} | {invader.name} HP: {invader.health}")
+    
 #Phase 6: Event Path 3 Captured by the Cybertronian High Guard
 
 if __name__== '__main__': #so the program will run, dont delete
