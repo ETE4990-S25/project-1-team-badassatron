@@ -84,6 +84,7 @@ def combat (player, enemy):
 
 #Phase 1: Start    
 def mainmenu():
+    global player
     print('-----Savior of Cybertron----')
     print('\n Hello citizen, Crybertron needs your help. ')
     print('We are sending you on a mission to discover the who has been messing with the core of our home')
@@ -131,15 +132,14 @@ def Prelude(player):
     if option == '1':
         player = character_selection(player.name)
     elif option == '2':
-        endgame_boring()
+        ending_boring(player.name)
     else:
         print("Invalid input. Please choose option 1 or 2.")
         Prelude(player)
 
 #Phase 3: Establish Inventory (dictionary with items and traits)
-    player = player(player.name, character.class)
     print(player.show_profile())
-    sneak_into_iacon_5000(player_name)
+    sneak_into_iacon_5000(player.name)
 
 class Item:
     def __init__(self, name, durability, traits=None):
@@ -197,9 +197,9 @@ class Inventory:
     def list_items(self):
         if not self.items:
             print("Your inventory is empty.")
-        return
-    for i, item in enumerate(self.items, 1):
-        print(f"{i}. {item.name} (Durability: {item.durability})")
+            return
+        for i, item in enumerate(self.items, 1):
+            print(f"{i}. {item.name} (Durability: {item.durability})")
 
 player_inventory = Inventory()
 
@@ -217,7 +217,7 @@ Medpack = Item("Medpack", 100)
 Jetpack = Wearable("Jetpack", 200)
 Add_Changer = Wearable("Transformer", 1_000_000)
 
-def ending_boring(player_name):
+def ending_boring(name):
     print('-----------------------------------------------------------------------------------')
     print("Boring Ending:")
     print("You continue to work in the mines. Orion Pax's revolt is crushed before it even begins and more miners are succumbing to the harsh conditions.")
@@ -256,7 +256,7 @@ def ending_megatron():
     print('You attempt to take the Matrix of Leadership, but it rejects you. You are bitter towards Orion Pax, for who you believe is too weak to lead Cybertron.')
 
 #Phase 4: Event Path 1 Sneaking into the Iacon 5000
-def sneak_into_iacon_5000(player_name):
+def sneak_into_iacon_5000(player):
     print('-----------------------------------------------------------------------------------')
     print("Welcome to the Iacon 5000, the best race in all of Cybertron!")
     print("You have an important decision to make.")
@@ -281,7 +281,7 @@ def sneak_into_iacon_5000(player_name):
                 else:
                     print("Invalid input. Please type 'yes' or 'no'.")
                     continue
-    escape_from_sublevel_50(player_name)
+    escape_from_sublevel_50(player)
 
 #Phase 5: Event Path 2 Escape from Sublevel 50 with B-127
     
@@ -304,15 +304,15 @@ def escape_from_sublevel_50(player_name):
 
     print("But as the train speeds through the tunnels, your group is suddenly attacked by **random invaders**! They think you're looting the energon!")
 
-    battle_choice()
+    battle_choice(player_name)
 
-def battle_choice():
+def battle_choice(player):
         print(' ')
         print("\nYou are now being attacked by random invaders while on the cargo train!")
         print("Choose an item from your inventory to use in the battle:")
     
         # Display available inventory items
-        for i, item in enumerate(player.inventory.items, 1):
+        for i, item in enumerate(player_inventory.items, 1):
             print(f"{i}. {item.name} Durability: {item.durability}")
     
         # Ask player to choose an item
@@ -447,7 +447,7 @@ def battle_arachnid():
             return "lose"
 
 # Define a function for the final battle with Sentinel Prime (1 round)
-def battle_sentinel():
+def battle_sentinel(player):
     global player_health, sentinel_health
     
     print("\nNow you face **Sentinel Prime** in a final battle!")
@@ -496,7 +496,7 @@ def battle_sentinel():
 
         # Let the player choose an item from their inventory for the final battle
     print("\nChoose an item from your inventory to use in this final round:")
-    for i, item in enumerate(inventory, 1):
+    for i, item in enumerate(player_inventory.items, 1):
             print(f"{i}. {item}")
     choice = int(input("\nEnter the number of the item you wish to use: "))
         
@@ -534,7 +534,7 @@ def final_choice():
         print("\nInvalid choice! No action was taken.")
         
 # Main event function
-def main_event():
+def main_event(player):
     global player_health, arachnid_health, sentinel_health
     
     # Start the battle with Arachnid
@@ -542,7 +542,7 @@ def main_event():
     
     if arachnid_battle_result == "win":
         print("\nYou have successfully defeated Arachnid! Now you face **Sentinel Prime**.")
-        sentinel_battle_result = battle_sentinel()
+        sentinel_battle_result = battle_sentinel(player)
         
         if sentinel_battle_result == "win":
             final_choice()
@@ -554,7 +554,7 @@ def main_event():
         print("\nYou were defeated by Arachnid, and now the fate of Cybertron is uncertain.")
         
 # Call the main event function to start the game
-main_event()
+main_event(player)
 def main_event():
     global player_health, arachnid_health, sentinel_health
     arachnid_battle_result = battle_arachnid()
