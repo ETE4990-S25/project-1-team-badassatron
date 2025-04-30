@@ -26,9 +26,9 @@ class Player:
     def alive(self):
         return self.health > 0
     
-    def attack(self,target):
-        print(f"{self.name} attacks {target.name} for {self.attack_power} damage.")
-        target.take_damage(self.attack_power)
+    def attack(self,enemy):
+        print(f"{self.name} attacks {enemy.name} for {self.attack_power} damage.")
+        enemy.take_damage(self.attack_power)
     
     def take_damage(self, amount):
         self.health -= amount
@@ -56,7 +56,6 @@ class Player:
 
         except ValueError:
             print("Invalid Input.")
-
 
 class Medic(Player):
     def __init__(self, name):
@@ -86,7 +85,24 @@ class Aerial(Player):
         super().__init__(name, health = 100, attack_power = 15)
         self.agility = 20
 
+class Enemy:
+    def __init__(self, name, health, attack):
+        self.name = name
+        self.health = health
+        self.attack = attack
 
+    def alive(self):
+        return self.health > 0
+    
+    def take_damage(self, damage):
+        self.health -= damage
+        if self.health< 0:
+            self.health = 0
+
+    def attack(self,player):
+        print(f"{self.name} attacks {player.name} for {self.attack_power} damage.")
+        player.take_damage(self.attack_power)
+    
 def combat (player, enemy):
     print(f"\n {player.name} faces {enemy.name} in combat!")
 
@@ -322,28 +338,36 @@ def escape_from_sublevel_50(player):
 
     print("\nBut as the train speeds through the tunnels, your group is suddenly attacked by **random invaders**! They think you're looting the energon!")
 
-    battle_choice(player)
+    battle_1(player)
 
-def battle_choice(player):
-        print(' ')
-        print("\nYou are now being attacked by random invaders while on the cargo train!")
-        print("Choose an item from your inventory to use in the battle:")
-    
-        # Display available inventory items
-        for i, item in enumerate(player.inventory, 1):
-            print(f"{i}. {item.name} Durability: {item.durability}")
-    
-        # Ask player to choose an item
-        try:
-            choice = int(input("\nEnter the number of the item you wish to use: "))
-            if 1 <= choice <= len(player.inventory.items):
-                selected_item = player.inventory.items[choice - 1]
-                print(f"\nYou used {selected_item.name}!")
-                selected_item.use()
-            else:
-                print("\nInvalid choice!")
-        except ValueError:
-            print("\nPlease enter a number.")
+def battle_1(player):
+    print("\nYou are now being attacked by random invaders while on the cargo train!")
+    print("Choose an item from your inventory to use in the battle:")
+
+    enemy = ("Invaders", 50, 10)
+    while player.alive() and enemy.alive():
+        print(f"\n {player.name}'s turn! ")
+        action = input(f"Choose your action: 1) Attack 2) Use Item 3) Do nothing ")
+
+        if action == "1":
+            player.attack(enemy)
+        elif action == "2":
+            player.choose_item()
+        elif action =="3":
+            print(f"\n{player.name} does nothing...")
+
+        if enemy.alive():
+            print(f"\n {enemy.name}'s turn!")
+            enemy.attack(player)
+
+        if not player.alive():
+            print(f"\n {player.name} has been defeated...")
+            game_end()
+
+    print (f"\n {player.name} HP: {player.health} | {enemy.name} HP: {enemy.health}")
+
+battle_1(player)
+        
 
 #Phase 6: Event Path 3 Captured by the Cybertronian High Guard
 
