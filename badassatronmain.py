@@ -320,9 +320,9 @@ def battle_1(player):
     print("Choose an item from your inventory to use in the battle:")
 
     invader = Enemy("Invaders", 50, 10)
-    player = Player("{player_name}")
 
     print(invader)
+    print(player)
     
     while player.alive() and invader.alive():
         print(f"player is of type: {type(player)}")
