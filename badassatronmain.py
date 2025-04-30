@@ -76,7 +76,7 @@ def combat (player, enemy):
     if enemy.health <= 10:
         print(f"{enemy.name} is critically wounded.")
 
-    print(f"\n Battle Over! {"You won!" if player.alive() else "You Lost!"}")
+    print(f"\n Battle Over! {'You won!' if player.alive() else 'You Lost!'}")
 
 def character_selection():
     classes = {
@@ -143,14 +143,14 @@ class Item:
     def __init__(self, name, durability, traits=None):
         self.name = name 
         self.durability = durability
-        self.traits = traits #create item traits
+        self.traits = traits if traits else [] #create item traits
 
     def use(self):
         if self.durability > 0:
             self.durability -= 1
             print (f'Used {self.name}, item durability now {self.durability}')
         else:
-            print(f'{self.name} is broken')
+            print(f'{self.name} is broken!')
 
 class Weapon(Item):
     def __init__(self,name, durability, traits=None, damage=0):
@@ -160,10 +160,11 @@ class Weapon(Item):
         def use(self):
             if self.durability > 0:
                 self.durability -= 1
-                print (f'Attacked with {self.name}, damage: {self.damage}, item durability now {self.durability}')
-            else:
-                print(f'{self.name} is broken')
+                print (f'Attacked with {self.name}, damage: {self.damage}, durability now {self.durability}')
                 return self.damage
+            else:
+                print(f'{self.name} is broken!')
+                return 0
             
 class Wearable(Item):
     def __init__(self,name, durability, traits=None):
@@ -173,22 +174,30 @@ class Inventory:
     def __init__(self):
         self.items = [] #when player chooses character, items automatically added to inventory
 
-    def add_item_to_pack(self, item):
+    def add(self, item):
         self.items.append(item)
-        print(f'{item.name} has been added to your pack')
+        print(f'{item.name} has been added to your invertory.')
 
-    def remove_item(self,item):
+    def remove(self,item):
         if item in self.items:
             self.items.remove(item)
-            print(f'{item.name} has been removed from your pack')
+            print(f'{item.name} has been removed.')
         else:
-            print(f'{item.name} is not in your pack.')
+            print(f'{item.name} not found in inventory.')
 
-    def use_item(self,item):
-        if item in self.items:
-            item.use()
-        else:
-            print(f'{item.name} is not in your pack.')
+    def use(self,item_name):
+        for item in self.items:
+            if item.name == item_name.lower():
+                item.use()
+                return
+        print(f'{item_name} not found in inventory.')
+
+    def list_items(self):
+        if not self.items:
+            print("Your inventory is empty.")
+        return
+    for i, item in enumerate(self.items, 1):
+        print(f"{i}. {item.name} (Durability: {item.durability})")
 
 player_inventory = Inventory()
 
@@ -206,14 +215,16 @@ Medpack = Item("Medpack", 100)
 Jetpack = Wearable("Jetpack", 200)
 Add_Changer = Wearable("Transformer", 1_000_000)
 
-def endgame_boring(player_name):
+def ending_boring(player_name):
     print('-----------------------------------------------------------------------------------')
     print("Boring Ending:")
     print("You continue to work in the mines. Orion Pax's revolt is crushed before it even begins and more miners are succumbing to the harsh conditions.")
     print("As time goes on, the energon reserves are depleted and the planet is dying. You are one of the last surviving Cybertronians.")
     print("It is revealed that Sentinel Prime was offloading the energon to the Quintessons, enemies to the planet of Cybertron.")
     print("Sentinel Prime, in his greed to claim leadership from the 13 Primes, has doomed the planet and its inhabitants.")
+    return "ending_boring"
     End_menu() #send to end menu to view stats and have restart option
+
 
 if __name__== '__main__': #so the program will run, dont delete
     mainmenu()
@@ -268,15 +279,6 @@ def sneak_into_iacon_5000(player_name):
                 else:
                     print("Invalid input. Please type 'yes' or 'no'.")
                     continue
-    if choice == "yes":
-        print("You decided to join Orion Pax and equip a jet pack")
-        player.inventory.add_item_to_pack(Jetpack)
-        print("With your jet pack, you fly past the competition, winning the race!")
-        print("The crowd goes wild that two minerbots have won the Iacon 5000 without the ability to transform.")
-    elif choice == "no":
-        print("\nYou decided not to join Orion Pax and watch from the sidelines.")
-        print("You still enter the race but without the jet pack, you fall terribly behind!")
-        print("Your loss is a disappointment and the transformers laugh at you and Orion")
     escape_from_sublevel_50(player_name)
 
 #Phase 5: Event Path 2 Escape from Sublevel 50 with B-127
@@ -451,7 +453,7 @@ def battle_sentinel():
     
     # Let the player choose an item from their inventory for the final battle
     print("\nChoose an item from your inventory to use in this final round:")
-    for i, item in enumerate(inventory, 1):
+    for i, item in enumerate(player.inventory.items, 1):
         print(f"{i}. {item}")
     choice = int(input("\nEnter the number of the item you wish to use: "))
     
