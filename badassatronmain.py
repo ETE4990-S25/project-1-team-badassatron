@@ -184,8 +184,8 @@ class Item:
         return f"{self.name} (Value: {self.value})"
 
 class Weapon(Item):
-    def __init__(self,name, durability, damage):
-        super().__init__(name, value = 0) #Will add functions after we figure out more story
+    def __init__(self, name, durability, damage):
+        super().__init__(name, value=0) #Will add functions after we figure out more story
         self.durability = durability
         self.damage = damage
 
@@ -193,12 +193,12 @@ class Weapon(Item):
             return f"{self.name} (Durability: {self.durability}, Damage: {self.damage})"
             
 class Wearable(Item):
-    def __init__(self,name, value, durability):
+    def __init__(self, name, value, durability):
         super().__init__(name, value) #Will add functions after we figure out more story
         self.durability = durability
 
     def __str__(self):
-        return f"{self.name} (Value: {self.value})"
+        return f"{self.name} (Value: {self.value}, Durability: {self.durability})"
 
 class Inventory:
     def __init__(self):
