@@ -1,11 +1,14 @@
 import random
 class Player:
-    def __init__(self, name, health = 100):
+    def __init__(self, name, health = 100, attack_power =10):
         self.name = name
         self.health = health
-        self.attack_power = 10
+        self.attack_power = attack_power
         self.character_class = self.__class__.__name__
 
+    def __str__(self):
+        return self.show_profile()
+    
     def alive(self):
         return self.health > 0
     
@@ -18,11 +21,11 @@ class Player:
         print(f"{self.name} takes {amount} damage. Health is now {self.health}.")
 
     def show_profile(self):
-        return f"Name: {self.name}, Class: {self.character_class}, HP: {self.health}, Attack: {self.attack}, Heal: {self.heal}, Shield: {self.shield}, Agility: {self.agility}"
+        return f"Name: {self.name}, Class: {self.character_class}, HP: {self.health}, Attack: {self.attack_power}"
     
 class Medic(Player):
     def __init__(self, name):
-        super().__init__(name)
+        super().__init__(name, health = 80, attack_power = 8)
         self.heal_amount = 10
 
     def heal(self):
@@ -31,13 +34,11 @@ class Medic(Player):
 
 class Warrior(Player):
     def __init__(self,name):
-        super().__init__(name)
-        self.attack_power = 20
+        super().__init__(name, health = 100, attack_power = 20)
 
 class Tank(Player):
     def __init__(self,name):
-        super().__init__(name, health = 150)
-        self.attack_power = 12
+        super().__init__(name, health = 150, attack_power = 12)
         self.armor = 5
 
     def take_damage(self, amount):
@@ -47,8 +48,7 @@ class Tank(Player):
 
 class Aerial(Player):
     def __init__(self,name):
-        super().__init__(name)
-        self.attack_power = 15
+        super().__init__(name, health = 100, attack_power = 15)
         self.agility = 20
 
 
@@ -56,29 +56,45 @@ def combat (player, enemy):
     print(f"\n {player.name} faces {enemy.name} in combat!")
 
     while player.alive() and enemy.alive():
-        print("\n"+ player.show_profile())
+        print(f"\n"+ player.show_profile())
         print(enemy.show_profile())
 
-        action = input ("What will you do? (attack, heal)")
+        action = input ("What will you do? (attack, heal):  ").strip().lower()
 
         if action == "attack":
             player.attack(enemy)
         elif action == "heal":
-            player.heal()
+            if hasattr(player, "heal"):
+                player.heal()
+            else:
+                print("You cannot heal...")
         else:
-            print("Invalid action")
-# Enemy attacks
-    if enemy.alive():
-        damage = random.randint(5, 10)
-        player.take_damage(damage)
-        print(f"{enemy.name} counterattacks {player.name} for {damage} damage!")
+            print("You cannot heal...")
+
+        # Enemy attacks
+        if enemy.alive():
+            damage = random.randint(5, 10)
+            player.take_damage(damage)
+            print(f"{enemy.name} counterattacks {player.name} for {damage} damage!")
 
     if enemy.health <= 10:
         print(f"{enemy.name} is critically wounded.")
 
-    print(f"\n Battle Over! {"You won!" if player.alive() else "You Lost!"}")
+    print(f"\n Battle Over! {'You won!' if player.alive() else 'You Lost!'}")     
 
-def character_selection():
+#Phase 1: Start    
+def mainmenu():
+    print('-----Savior of Cybertron----')
+    print('\n Hello citizen, Crybertron needs your help. ')
+    print('We are sending you on a mission to discover the who has been messing with the core of our home')
+    print('The instructions are simple, choose as you see fit, and see where destiny sends you.')
+    print('During interactions, you will take turns attacking until one is victorious.')
+
+    player_name= input('\n First, please tell us who you are: ').strip()
+    player = character_selection(player_name)
+    Prelude(player)
+
+def character_selection(name):
     classes = {
         "Medic": Medic,
         "Warrior" : Warrior,
@@ -93,49 +109,35 @@ def character_selection():
     while True:
         choice = input("Enter class: ").strip()
         if choice in classes:
-            print(f"You have chosen {Player.character_class}")
-            return Player
+            player = classes[choice](name)
+            print(f"You have chosen {player.character_class}")
+            return player
         else:
             print("Invalid choice")
-     
-
-#Phase 1: Start    
-def mainmenu():
-    print('-----Savior of Cybertron----')
-    print('Hello citizen, Crybertron needs your help. ')
-    print('We are sending you on a mission to discover the who has been messing with the core of our home')
-    print('The instructions are simple, choose as you see fit, and see where destiny sends you.')
-    print('During interactions, you will take turns attacking until one is victorious.')
-    print('')
-    Player.__name__ = input('First, please tell us who you are: ')
-    print('')
-    Prelude(Player)
 
 #Phase 2: Prelude
-def Prelude(Player):
+def Prelude(player):
     print('-----------------------------------------------------------------------------------')
-    print(f'Young {Player.__name__}, Minerbot69420, your producton of energon has been lacking and Sentinel Prime is counting on you.')
-    print(' ')
-    print('As a miner you')
+    print(f'\n Young {player.name}, Minerbot69420, your producton of energon has been lacking and Sentinel Prime is counting on you.')
+    print('\n As a miner you')
     print("   - work 14 hour work days")
     print('   - cannot transform ')
-    print(' ')
-    print("Sentinel Prime just announced a higher quota for this week, like a cog in a machine am I right? ")
+    print("\n Sentinel Prime just announced a higher quota for this week, like a cog in a machine am I right? ")
     print('You are approached by another bot about a rumor. Fellow miner, Orion Pax, has decided to revolt!')
-    print(f'Please {Player.__name__}, choose the path you wish to take...')
+    print(f'\n Please {player.name}, choose the path you wish to take...')
     print('   1. Revolt with Orion Pax and choose your destiny')
     print('   2. Continue to work in the mines.')
-    option = input()
+    option = input().strip()
     if option == '1':
-        character_selection()
+        player = character_selection(player.name)
     elif option == '2':
         endgame_boring()
     else:
         print("Invalid input. Please choose option 1 or 2.")
-        Prelude()
+        Prelude(player)
 
 #Phase 3: Establish Inventory (dictionary with items and traits)
-    player = Player(player_name, character_class)
+    player = player(player.name, character.class)
     print(player.show_profile())
     sneak_into_iacon_5000(player_name)
 
