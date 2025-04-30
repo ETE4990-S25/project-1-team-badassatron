@@ -223,8 +223,18 @@ def ending_boring(name):
     print("As time goes on, the energon reserves are depleted and the planet is dying. You are one of the last surviving Cybertronians.")
     print("It is revealed that Sentinel Prime was offloading the energon to the Quintessons, enemies to the planet of Cybertron.")
     print("Sentinel Prime, in his greed to claim leadership from the 13 Primes, has doomed the planet and its inhabitants.")
-    return ending_boring
-    End_menu() #send to end menu to view stats and have restart option
+    game_end() #send to end menu to view stats and have restart option
+
+def game_end():
+    print("\nThank you for playing Savior of Cybertron!")
+    choice = input("Would you like to play again? (yes/no): ").lower()
+    if choice == "yes":
+        mainmenu()
+    elif choice == "no":
+        print("Stay safe warrior!")
+    else:
+        print("Invalid input. Please type 'yes' or 'no'.")
+    exit()
 
 def ending_prime():
     print('-----------------------------------------------------------------------------------')
@@ -552,6 +562,9 @@ def main_event(player):
         print("\nYou were defeated by Arachnid, and now the fate of Cybertron is uncertain.")
         
 # Call the main event function to start the game
+# Ensure the player is initialized before calling main_event
+player_name = input("Enter your player name: ").strip()
+player = character_selection(player_name)
 main_event(player)
 def main_event():
     global player_health, arachnid_health, sentinel_health
@@ -559,16 +572,3 @@ def main_event():
     if player_health <= 0:
         print("\nYou were defeated by Arachnid, and now the fate of Cybertron is uncertain.")
     return
-
-#Game End with Stats -> Reset and Restart
-def game_end():
-    print("\nThank you for playing Savior of Cybertron!")
-    choice = input("Would you like to play again? (yes/no): ").lower()
-    if choice == "yes":
-        mainmenu()
-    elif choice == "no":
-        print("Stay safe warrior!")
-    else:
-        print("Invalid input. Please type 'yes' or 'no'.")
-        game_end()
-
