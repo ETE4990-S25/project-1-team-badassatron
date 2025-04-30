@@ -103,7 +103,7 @@ def character_selection(name):
         "Aerial" : Aerial
     }
 
-    print("Please choose your path: ")
+    print("\n Please choose your path: ")
     for class_name in classes:
         print(f"- {class_name}")
 
@@ -130,7 +130,8 @@ def Prelude(player):
     print('   2. Continue to work in the mines.')
     option = input().strip()
     if option == '1':
-        player = character_selection(player.name)
+        print(player.show_profile())
+        sneak_into_iacon_5000(player.name)
     elif option == '2':
         ending_boring(player.name)
     else:
@@ -138,8 +139,6 @@ def Prelude(player):
         Prelude(player)
 
 #Phase 3: Establish Inventory (dictionary with items and traits)
-    print(player.show_profile())
-    sneak_into_iacon_5000(player.name)
 
 class Item:
     def __init__(self, name, durability, traits=None):
