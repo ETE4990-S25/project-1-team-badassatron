@@ -195,6 +195,7 @@ class Weapon(Item):
 class Wearable(Item):
     def __init__(self,name, value, durability):
         super().__init__(name, value) #Will add functions after we figure out more story
+        self.durability = durability
 
     def __str__(self):
         return f"{self.name} (Value: {self.value})"
@@ -329,7 +330,7 @@ def battle_choice(player):
         print("Choose an item from your inventory to use in the battle:")
     
         # Display available inventory items
-        for i, item in enumerate(player_inventory.items, 1):
+        for i, item in enumerate(player.inventory, 1):
             print(f"{i}. {item.name} Durability: {item.durability}")
     
         # Ask player to choose an item
@@ -423,7 +424,7 @@ def battle_arachnid():
         
         # Let the player choose an item from their inventory
         print("\nChoose an item from your inventory to use in this round:")
-        for i, item in enumerate(player_inventory.items, 1):
+        for i, item in enumerate(player.inventory, 1):
             print(f"{i}. {item}")
         choice = int(input("\nEnter the number of the item you wish to use: "))
         
@@ -516,7 +517,7 @@ def battle_sentinel(player):
 
         # Let the player choose an item from their inventory for the final battle
     print("\nChoose an item from your inventory to use in this final round:")
-    for i, item in enumerate(player_inventory.items, 1):
+    for i, item in enumerate(player.inventory.items, 1):
             print(f"{i}. {item}")
     choice = int(input("\nEnter the number of the item you wish to use: "))
         
