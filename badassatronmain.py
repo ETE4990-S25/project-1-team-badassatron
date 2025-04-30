@@ -224,12 +224,8 @@ def ending_boring(name):
     print("As time goes on, the energon reserves are depleted and the planet is dying. You are one of the last surviving Cybertronians.")
     print("It is revealed that Sentinel Prime was offloading the energon to the Quintessons, enemies to the planet of Cybertron.")
     print("Sentinel Prime, in his greed to claim leadership from the 13 Primes, has doomed the planet and its inhabitants.")
-    return "ending_boring"
+    return ending_boring
     End_menu() #send to end menu to view stats and have restart option
-
-
-if __name__== '__main__': #so the program will run, dont delete
-    mainmenu()
 
 def ending_prime():
     print('-----------------------------------------------------------------------------------')
@@ -258,22 +254,22 @@ def ending_megatron():
 #Phase 4: Event Path 1 Sneaking into the Iacon 5000
 def sneak_into_iacon_5000(player):
     print('-----------------------------------------------------------------------------------')
-    print("Welcome to the Iacon 5000, the best race in all of Cybertron!")
+    print("\n Welcome to the Iacon 5000, the best race in all of Cybertron!")
     print("You have an important decision to make.")
     print("Orion Pax has a plan to sneak into the Iacon 5000 and make a name for the minerbots.")
 
-    choice = input("Join Orion Pax and equip a jet pack? (Yes/No): ").strip().lower()
+    choice = input("\n Join Orion Pax and equip a jet pack? (Yes/No): ").strip().lower()
 
     if choice == "yes":
-        print("You decided to join Orion Pax and equip a jet pack for the race.")
+        print("\n You decided to join Orion Pax and equip a jet pack for the race.")
         print("With your jet pack, you fly past the competition, winning the race!")
         print("The crowd goes wild that two minerbots have won the Iacon 5000 without the ability to transform.")
     elif choice == "no":
-        print("\nYou decided not to join Orion Pax and watch from the sidelines.")
+        print("\n You decided not to join Orion Pax and watch from the sidelines.")
         print("You still enter the race, but without the jet pack, you fall terribly behind!")
         print("Your loss is a disappointment and the transformers laugh at you and Orion Pax for trying to race")
     else:
-        print("Invalid input. Please type 'yes' or 'no'.")
+        print("\n Invalid input. Please type 'yes' or 'no'.")
         while True:
                 choice = input("Do you want to join Orion Pax and equip a jet pack" "yes/no): ").lower()
                 if choice in ["yes", "no"]:
@@ -287,22 +283,22 @@ def sneak_into_iacon_5000(player):
     
 def escape_from_sublevel_50(player_name):
     print('-----------------------------------------------------------------------------------')
-    print("You and Orion Pax are kicked down to Sublevel 50 by one of Sentinel Prime's guards.")
+    print("\nYou and Orion Pax are kicked down to Sublevel 50 by one of Sentinel Prime's guards.")
     print("As you tumble down, you land in the depths of Cybertron, in a dark and eerie sector filled with old mining equipment.")
     
-    print("Here, you meet B-127, a friendly miner bot in charge of all the scrap metal. B-127 explains that he's been working here alone, building sculptures out of old parts.")
+    print("\nHere, you meet B-127, a friendly miner bot in charge of all the scrap metal. B-127 explains that he's been working here alone, building sculptures out of old parts.")
     print("As you interact with B-127, you accidentally knock into one of his friends and their head falls off, popping out a disc.")
     
-    print("B-127 plays the disc for you. It's a **distress message** from the legendary **Alpha Trion**. The message reveals that the Primes are on a mission and they were told to meet in a cave, "
+    print("\nB-127 plays the disc for you. It's a **distress message** from the legendary **Alpha Trion**. The message reveals that the Primes are on a mission and they were told to meet in a cave, "
           "with coordinates pointing to the surface of Cybertron.")
     
-    print("This discovery fills you with determination. You and Orion Pax decide to set course for the surface to uncover the truth behind what happened to the Primes.")
+    print("\nThis discovery fills you with determination. You and Orion Pax decide to set course for the surface to uncover the truth behind what happened to the Primes.")
     print("On your way out of Sublevel 50, you encounter another robot named **Elita**, a warrior who shares your interest in finding out the truth.")
     
-    print("Now, the three of you venture out of your comfort zones to unravel the mysteries of Cybertron and the disappearance of the Primes.")
+    print("\nNow, the three of you venture out of your comfort zones to unravel the mysteries of Cybertron and the disappearance of the Primes.")
     print("You hop aboard a cargo train carrying loads of **Energon** on a path to the surface of Cybertron.")
 
-    print("But as the train speeds through the tunnels, your group is suddenly attacked by **random invaders**! They think you're looting the energon!")
+    print("\nBut as the train speeds through the tunnels, your group is suddenly attacked by **random invaders**! They think you're looting the energon!")
 
     battle_choice(player_name)
 
@@ -328,6 +324,9 @@ def battle_choice(player):
             print("\nPlease enter a number.")
 
 #Phase 6: Event Path 3 Captured by the Cybertronian High Guard
+
+if __name__== '__main__': #so the program will run, dont delete
+    mainmenu()
 
 def battle_choice2(player_name):
     print("\nYou are captured by the Cybertronian High Guard. You must decide what to do next.")
