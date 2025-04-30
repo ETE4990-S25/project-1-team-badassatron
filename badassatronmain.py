@@ -215,6 +215,9 @@ def endgame_boring(player_name):
     print("Sentinel Prime, in his greed to claim leadership from the 13 Primes, has doomed the planet and its inhabitants.")
     End_menu() #send to end menu to view stats and have restart option
 
+if __name__== '__main__': #so the program will run, dont delete
+    mainmenu()
+
 def ending_prime():
     print('-----------------------------------------------------------------------------------')
     print("Because of your integrity and bravery, you have been chosen to be the next Prime. You have saved Cybertron from the brink of destruction.")
@@ -319,9 +322,6 @@ def battle_choice():
                 print("\nInvalid choice!")
         except ValueError:
             print("\nPlease enter a number.")
-
-if __name__== '__main__': #so the program will run, dont delete
-    mainmenu()
 
 #Phase 6: Event Path 3 Captured by the Cybertronian High Guard
 
