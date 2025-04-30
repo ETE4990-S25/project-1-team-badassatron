@@ -5,6 +5,20 @@ class Player:
         self.health = health
         self.attack_power = attack_power
         self.character_class = self.__class__.__name__
+        self.inventory = [
+            Item("Allspark", 1_000_000),
+            Item("Matrix of Leadership", 1_000_000),
+            Weapon("Axe", 20, damage=15),
+            Weapon("Sword", 30, damage=20),
+            Weapon("Bazooka", 40, damage=50),
+            Weapon("Handheld Turret", 40, damage=35),
+            Weapon("Zapper", 20, damage=25),
+            Item("Shield", 200),
+            Item("Energon", 100_000),
+            Item("Medpack", 100),
+            Wearable("Jetpack", 200),
+            Wearable("Transformer", 1_000_000)
+        ]
 
     def __str__(self):
         return self.show_profile()
@@ -23,6 +37,27 @@ class Player:
     def show_profile(self):
         return f"Name: {self.name}, Class: {self.character_class}, HP: {self.health}, Attack: {self.attack_power}"
     
+    def display_inventory(self):
+        print("Your Inventory: ")
+        for index, item in enumerate(self.inventory, start =1):
+            print(f"{index}. {item}")
+        print()
+
+    def choose_item(self):
+        self.display_inventory()
+        try:
+            choice = int(input("Enter the number of the item you wish to use: "))
+
+            if 1 <= choice <= len(self.inventory):
+                selected_item = self.inventory[choice - 1]
+                print (f"You chose {selected_item}.")
+            else:
+                print("Invalid input.")
+
+        except ValueError:
+            print("Invalid Input.")
+
+
 class Medic(Player):
     def __init__(self, name):
         super().__init__(name, health = 80, attack_power = 8)
@@ -141,35 +176,28 @@ def Prelude(player):
 #Phase 3: Establish Inventory (dictionary with items and traits)
 
 class Item:
-    def __init__(self, name, durability, traits=None):
+    def __init__(self, name, value):
         self.name = name 
-        self.durability = durability
-        self.traits = traits if traits else [] #create item traits
+        self.value = value
 
-    def use(self):
-        if self.durability > 0:
-            self.durability -= 1
-            print (f'Used {self.name}, item durability now {self.durability}')
-        else:
-            print(f'{self.name} is broken!')
+    def __str__(self):
+        return f"{self.name} (Value: {self.value})"
 
 class Weapon(Item):
-    def __init__(self,name, durability, traits=None, damage=0):
-        super().__init__(name, durability, traits) #Will add functions after we figure out more story
+    def __init__(self,name, durability, damage):
+        super().__init__(name, value = 0) #Will add functions after we figure out more story
+        self.durability = durability
         self.damage = damage
 
-        def use(self):
-            if self.durability > 0:
-                self.durability -= 1
-                print (f'Attacked with {self.name}, damage: {self.damage}, durability now {self.durability}')
-                return self.damage
-            else:
-                print(f'{self.name} is broken!')
-                return 0
+        def __str__(self):
+            return f"{self.name} (Durability: {self.durability}, Damage: {self.damage})"
             
 class Wearable(Item):
-    def __init__(self,name, durability, traits=None):
-        super().__init__(name, durability, traits) #Will add functions after we figure out more story
+    def __init__(self,name, value, durability):
+        super().__init__(name, value) #Will add functions after we figure out more story
+
+    def __str__(self):
+        return f"{self.name} (Value: {self.value})"
 
 class Inventory:
     def __init__(self):
@@ -290,7 +318,7 @@ def sneak_into_iacon_5000(player):
 
 #Phase 5: Event Path 2 Escape from Sublevel 50 with B-127
     
-def escape_from_sublevel_50(player_name):
+def escape_from_sublevel_50(player):
     print('-----------------------------------------------------------------------------------')
     print("\nYou and Orion Pax are kicked down to Sublevel 50 by one of Sentinel Prime's guards.")
     print("As you tumble down, you land in the depths of Cybertron, in a dark and eerie sector filled with old mining equipment.")
@@ -309,7 +337,7 @@ def escape_from_sublevel_50(player_name):
 
     print("\nBut as the train speeds through the tunnels, your group is suddenly attacked by **random invaders**! They think you're looting the energon!")
 
-    battle_choice(player_name)
+    battle_choice(player)
 
 def battle_choice(player):
         print(' ')
