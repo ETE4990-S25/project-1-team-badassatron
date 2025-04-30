@@ -228,22 +228,6 @@ class Inventory:
         for i, item in enumerate(self.items, 1):
             print(f"{i}. {item.name} (Durability: {item.durability})")
 
-player_inventory = Inventory()
-
-#item list
-Allspark = Item("Allspark", 1_000_000)
-Matrix_of_Leadership = Item("Matrix of Leadership", 1_000_000)
-Axe = Weapon("Axe", 20, damage=15)
-Sword = Weapon("Sword", 30, damage=20)
-Bazooka = Weapon("Bazooka", 40, damage=50)
-Handheld_Turret = Weapon("Handheld Turret", 40, damage=35)
-Zapper = Weapon("Zapper", 20, damage=25)
-Shield = Item("Shield", 200)
-Energon = Item("Energon", 100_000)
-Medpack = Item("Medpack", 100)
-Jetpack = Wearable("Jetpack", 200)
-Add_Changer = Wearable("Transformer", 1_000_000)
-
 def ending_boring(name):
     print('-----------------------------------------------------------------------------------')
     print("Boring Ending:")
