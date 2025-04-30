@@ -517,7 +517,7 @@ def battle_sentinel(player):
         # Let the player choose an item from their inventory for the final battle
     print("\nChoose an item from your inventory to use in this final round:")
     for i, item in enumerate(player_inventory.items, 1):
-            print(f"{i}. {item}")
+            print(f"{i}. {item}")   
     choice = int(input("\nEnter the number of the item you wish to use: "))
         
     if choice == 1:
